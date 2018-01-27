@@ -32,6 +32,7 @@ void draw() {
   if (m<500) {
     drawIntro();
   } else {
+    noStroke();
     b.paddleCollision(p1);
     b.paddleCollision(p2);
     //b.update();
@@ -130,12 +131,6 @@ class Ball {
   }
 }
 
-//canvas
-
-
-
-//laser
-
 
 
 //paddle
@@ -183,9 +178,10 @@ class Paddle {
         line(laserPos, laserPosY, laserPos+10, laserPosY);
         laserPos -= 5;
         noStroke();
-        if (laserPos == 0) {
+        if (laserPos < -10) {
           p1Laser = false;
           laserPos =pos.x;
+          laserPosY = pos.y;
         }
       }
     }
@@ -207,9 +203,10 @@ class Paddle {
         line(laserPos, laserPosY, laserPos+10, laserPosY);
         laserPos += 5;
         noStroke();
-        if (laserPos == width) {
+        if (laserPos > width + 10) {
           p2Laser = false;
           laserPos =pos.x;
+          laserPosY = pos.y;
         }
       }
     }
