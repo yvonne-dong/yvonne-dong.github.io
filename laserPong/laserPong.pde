@@ -33,14 +33,16 @@ void draw() {
     drawIntro();
   } else {
     noStroke();
+    p1.ballCollision();
+    p2.ballCollision();
     b.paddleCollision(p1);
     b.paddleCollision(p2);
-    //b.update();
-    //b.display();
-    p1.laserCollision(p2);
+    b.update();
+    b.display();
+    p1.laserCollision();
     p1.update();
     p1.display();
-    p2.laserCollision(p1);
+    p2.laserCollision();
     p2.update();
     p2.display();
 
@@ -75,7 +77,7 @@ class Ball {
   PVector pos;
   PVector vel;
   float angle;
-  float speed = 3;
+  float speed = 1;
   float s = 15;
 
   Ball() {
@@ -163,20 +165,22 @@ class Paddle {
   void update() {
     if (playerNum == 0) {
       if (p1Up) {
-        if (pos.y-h/2>0) {
-          pos.y -= 7;
+        if (pos.y-h/2 > 0) {
+          pos.y -= 10;
         }
       }
       if (p1Down) {
-        if (pos.y+h/2< width) {
-          pos.y +=7;
+        if (pos.y+h/2 < width) {
+          pos.y += 10;
         }
       }
       if (p1Laser) {
+        laserPosY = pos.y;
         stroke(255);
         strokeWeight(10);
         line(laserPos, laserPosY, laserPos+10, laserPosY);
         laserPos -= 5;
+
         noStroke();
         if (laserPos < -10) {
           p1Laser = false;
@@ -198,6 +202,7 @@ class Paddle {
         }
       }
       if (p2Laser) {
+        laserPosY = pos.y;
         stroke(255);
         strokeWeight(10);
         line(laserPos, laserPosY, laserPos+10, laserPosY);
@@ -218,7 +223,7 @@ class Paddle {
     rect(pos.x, pos.y, w, h);
   }
 
-  void laserCollision (Paddle p) {
+  void laserCollision() {
     if (p1.laserPos == p2.pos.x && p1.laserPosY > p2.pos.y - p2.h/2 
       && p1.laserPosY < p2.pos.y + p2.h/2) {
       p2Score ++;
@@ -226,6 +231,16 @@ class Paddle {
     if (p2.laserPos == p1.pos.x && p2.laserPosY > p1.pos.y - p1.h/2 
       && p2.laserPosY < p1.pos.y + p1.h/2) {
       p1Score++;
+    }
+  }
+
+  void ballCollision() {
+    if (p1.laserPos > b.pos.x - b.s/2 && p1.laserPos < b.pos.x + b.s/2 
+      && p1.laserPosY > b.pos.y - b.s/2 && p1.laserPosY < b.pos.y + b.s/2) {
+      p1Score ++;
+    } else if (p2.laserPos + 10 > b.pos.x - b.s/2 && p2.laserPos + 10 < b.pos.x + b.s/2 
+      && p2.laserPosY > b.pos.y - b.s/2 && p2.laserPosY < b.pos.y + b.s/2) {
+      p2Score ++;
     }
   }
 }
