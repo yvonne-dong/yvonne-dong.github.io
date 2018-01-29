@@ -7,6 +7,7 @@ Minim minim;
 AudioSample shoot;
 AudioSample hurt;
 AudioSample bounce;
+AudioSample ending;
 
 PImage Finn;
 int p1Score;
@@ -27,9 +28,7 @@ Paddle p2;
 void setup() {
   minim = new Minim(this);
   shoot = minim.loadSample("Laser_Shoot.wav", 512);
-  minim = new Minim(this);
   hurt = minim.loadSample("hurt.wav", 512);
-  minim = new Minim(this);
   bounce = minim.loadSample("bounce.wav", 512);
 
   Finn = loadImage("finn.png");
@@ -44,26 +43,30 @@ void setup() {
 void draw() {
   background(0);
   int m = millis();
-  if (m<500) {
+  if (m < 6000) {
     drawIntro();
   } else {
-    noStroke();
-    p1.ballCollision();
-    p2.ballCollision();
-
-    b.paddleCollision(p1);
-    b.paddleCollision(p2);
-    b.update();
-    b.display();
-
-    p1.laserCollision();
-    p2.laserCollision();
-    p1.update();
-    p1.display();    
-    p2.update();
-    p2.display();
+    noStroke();    
+    if (p1Score > p2Score) {      
+      rectMode(CORNER);
+      if (p1Score >= 11) {
+        fill(156, 207, random(150, 252), 300);
+      } else {
+        fill(156, 207, 252, 300);
+      }
+      rect(0, 0, width/2, height);
+    } else if (p2Score > p1Score) {
+      rectMode(CORNER);
+      if (p2Score >= 11) {
+        fill(255, random(150, 225), 122, 300);
+      } else {
+        fill(255, 225, 122, 300);
+      }
+      rect(width/2, 0, width, height);
+    }
 
     for (int i = 0; i < 501; i = i+20) {
+      fill(255);
       rect(width/2, i, 12, 12);
     }
 
@@ -73,6 +76,25 @@ void draw() {
 
     text(p1Score, width/2 - 100, 50);
     text(p2Score, width/2 + 100, 50);
+
+
+
+    rectMode(CENTER);
+    p1.ballCollision();
+    p2.ballCollision();
+    b.paddleCollision(p1);
+    b.paddleCollision(p2);
+
+    b.update();
+    b.display();
+
+    p1.laserCollision();
+    p1.update();
+    p1.display(); 
+
+    p2.laserCollision();
+    p2.update();
+    p2.display();
   }
 }
 
@@ -176,8 +198,8 @@ class Paddle {
       pos = new PVector(15, height/2);
       laserPos = pos.x;
       laserPosY = pos.y;
-      w =20;
-      h=100;
+      w = 20;
+      h = 100;
     }
   }
 
