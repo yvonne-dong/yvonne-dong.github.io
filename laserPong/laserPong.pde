@@ -2,7 +2,13 @@
 //work together
 //drawing api  -- visual 
 //w1003
+import ddf.minim.*;
+Minim minim;
+AudioSample shoot;
+AudioSample hurt;
+AudioSample bounce;
 
+PImage Finn;
 int p1Score;
 int p2Score;
 
@@ -19,6 +25,15 @@ Paddle p1;
 Paddle p2;
 
 void setup() {
+  minim = new Minim(this);
+  shoot = minim.loadSample("Laser_Shoot.wav", 512);
+  minim = new Minim(this);
+  hurt = minim.loadSample("hurt.wav", 512);
+  minim = new Minim(this);
+  bounce = minim.loadSample("bounce.wav", 512);
+
+  Finn = loadImage("finn.png");
+  imageMode(CENTER);
   size(500, 500);
   background(0);
   b = new Ball();
@@ -35,14 +50,16 @@ void draw() {
     noStroke();
     p1.ballCollision();
     p2.ballCollision();
+
     b.paddleCollision(p1);
     b.paddleCollision(p2);
     b.update();
     b.display();
+
     p1.laserCollision();
-    p1.update();
-    p1.display();
     p2.laserCollision();
+    p1.update();
+    p1.display();    
     p2.update();
     p2.display();
 
@@ -77,8 +94,8 @@ class Ball {
   PVector pos;
   PVector vel;
   float angle;
-  float speed = 1;
-  float s = 15;
+  float speed = 4;
+  float s = 40;
 
   Ball() {
     pos = new PVector(width/2, height/2);
@@ -89,29 +106,24 @@ class Ball {
   }
 
   void update() {
-
-    //   if (pos.x < s/2 || pos.x > width - s/2) {
-
     if (p2Score >=11) {
       text("Win!", width/2 + 100, 100);
     } else if ( p1Score >=11) {
       text("Win!", width/2 - 100, 100);
     } else if (p2Score <11) {
       if (pos.x<s/2) {
+        hurt.trigger();
         p2Score++;
         pos = new PVector(width/2, height/2);
-        //vel.x =random(30);
-        //vel.y =random(30);
       } else if (pos.x>width-s/2) {
+        hurt.trigger();
         p1Score++;
         pos = new PVector(width/2, height/2);
-        //vel.x =random(30);
-        //vel.y =random(30);
       }
 
       if (pos.y < s/2 || pos.y > height - s/2) {
+        bounce.trigger();
         vel.y *= -1;
-        //vel.x *= -1;
       }
       pos.add(vel);
     }
@@ -121,14 +133,21 @@ class Ball {
     noStroke();
     fill(255);
     rectMode(CENTER);
-    rect(pos.x, pos.y, s, s);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(radians(angle));
+    image(Finn, 0, 0);    
+    popMatrix();
+    angle += 5;
+    //rect(pos.x, pos.y, s, s);
   } 
 
   void paddleCollision(Paddle p) {
-    if (pos.x+s/2> p.pos.x-p.w/2 && pos.x-s/2<p.pos.x+p.w/2 && 
-      pos.y+s/2> p.pos.y-p.h/2 && pos.y-s/2<p.pos.y+p.h/2) {
-      vel.x *= -1;
-      // vel.y *= -1;
+    if (pos.x+s/2> p.pos.x-p.w/2 && pos.x-s/2<p.pos.x+p.w/2) {
+      if (pos.y+s/2> p.pos.y-p.h/2 && pos.y-s/2<p.pos.y+p.h/2) {
+        bounce.trigger();
+        vel.x *= -1;
+      }
     }
   }
 }
@@ -174,17 +193,20 @@ class Paddle {
           pos.y += 10;
         }
       }
-      if (p1Laser) {
+      if (p1Laser) {        
         laserPosY = pos.y;
-        stroke(255);
-        strokeWeight(10);
-        line(laserPos, laserPosY, laserPos+10, laserPosY);
-        laserPos -= 5;
+        stroke(0, 135, 255);
+        strokeWeight(5);        
+        line(laserPos+20, laserPosY-10, laserPos+10, laserPosY-10);
+        line(laserPos+20, laserPosY+10, laserPos+10, laserPosY+10);
 
+        line(laserPos, laserPosY, laserPos+10, laserPosY);        
+        laserPos -= 5;
         noStroke();
+
         if (laserPos < -10) {
           p1Laser = false;
-          laserPos =pos.x;
+          laserPos = pos.x;
           laserPosY = pos.y;
         }
       }
@@ -198,19 +220,23 @@ class Paddle {
       }
       if (p2Down) {
         if (pos.y+h/2< width) {
-          pos.y +=7;
+          pos.y += 7;
         }
       }
       if (p2Laser) {
         laserPosY = pos.y;
-        stroke(255);
-        strokeWeight(10);
+        stroke(255, 199, 0);
+        strokeWeight(5);        
+        line(laserPos-10, laserPosY-10, laserPos, laserPosY-10);
+        line(laserPos-10, laserPosY+10, laserPos, laserPosY+10);
+
         line(laserPos, laserPosY, laserPos+10, laserPosY);
         laserPos += 5;
         noStroke();
+
         if (laserPos > width + 10) {
           p2Laser = false;
-          laserPos =pos.x;
+          laserPos = pos.x;
           laserPosY = pos.y;
         }
       }
@@ -226,20 +252,28 @@ class Paddle {
   void laserCollision() {
     if (p1.laserPos == p2.pos.x && p1.laserPosY > p2.pos.y - p2.h/2 
       && p1.laserPosY < p2.pos.y + p2.h/2) {
+      hurt.trigger();
       p2Score ++;
+      b.display();
+      //p1Laser = false;
     }
     if (p2.laserPos == p1.pos.x && p2.laserPosY > p1.pos.y - p1.h/2 
       && p2.laserPosY < p1.pos.y + p1.h/2) {
+      hurt.trigger();
       p1Score++;
+      b.display();
+      //p2Laser = false;
     }
   }
 
   void ballCollision() {
     if (p1.laserPos > b.pos.x - b.s/2 && p1.laserPos < b.pos.x + b.s/2 
       && p1.laserPosY > b.pos.y - b.s/2 && p1.laserPosY < b.pos.y + b.s/2) {
+      hurt.trigger();
       p1Score ++;
     } else if (p2.laserPos + 10 > b.pos.x - b.s/2 && p2.laserPos + 10 < b.pos.x + b.s/2 
       && p2.laserPosY > b.pos.y - b.s/2 && p2.laserPosY < b.pos.y + b.s/2) {
+      hurt.trigger();
       p2Score ++;
     }
   }
@@ -254,6 +288,7 @@ void keyPressed() {
       p1Down = true;
     }
     if (keyCode == LEFT) {
+      shoot.trigger();
       p1Laser = true;
     }
   }
@@ -266,6 +301,7 @@ void keyPressed() {
     p2Down = true;
   }
   if (key == 'd') {
+    shoot.trigger();
     p2Laser = true;
   }
 }
