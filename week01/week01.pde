@@ -189,7 +189,7 @@ class Paddle {
   Paddle(int whichPlayer) {
     playerNum = whichPlayer;
     if (whichPlayer == 0) {
-      pos = new PVector(width-15-w, height/2); 
+      pos = new PVector(width-15, height/2); 
       laserPos = pos.x;
       laserPosY = pos.y;
       w = 20;
