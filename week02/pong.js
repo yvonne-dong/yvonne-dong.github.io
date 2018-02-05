@@ -31,7 +31,8 @@ function setup() {
 
 function draw(){
   background(0);
-  ball.paddleCollision();
+  ball.paddleCollision1();
+  ball.paddleCollision2();
   ball.update();
   ball.display();
 
@@ -46,7 +47,7 @@ function draw(){
 function Ball(){
   this.pos = createVector(width/2, height/2);
   this.vel = createVector(0, 0);
-  var s = 40;
+  var s = 60;
   var angle = random(TWO_PI);
   var speed = 4;
   this.vel.x = cos(angle) * speed;
@@ -78,9 +79,17 @@ function Ball(){
     angle += 0.05;
   }
 
-  this.paddleCollision = function (){
+  this.paddleCollision1 = function (){
     if (this.pos.x+s/2 > p1.pos.x && this.pos.x-s/2 < p1.pos.x) {
       if (this.pos.y+s/2 > p1.pos.y && this.pos.y-s/2 < p1.pos.y) {
+        this.vel.x *= -1;
+      }
+    }
+  }
+
+  this.paddleCollision2 = function (){
+    if (this.pos.x+s/2 > p2.pos.x && this.pos.x-s/2 < p2.pos.x) {
+      if (this.pos.y+s/2 > p2.pos.y && this.pos.y-s/2 < p2.pos.y) {
         this.vel.x *= -1;
       }
     }
