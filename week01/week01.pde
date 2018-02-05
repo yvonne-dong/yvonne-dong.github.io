@@ -276,14 +276,14 @@ class Paddle {
       && p1.laserPosY < p2.pos.y + p2.h/2) {
       hurt.trigger();
       p2Score ++;
-      b.display();
+      //b.display();
       //p1Laser = false;
     }
     if (p2.laserPos == p1.pos.x && p2.laserPosY > p1.pos.y - p1.h/2 
       && p2.laserPosY < p1.pos.y + p1.h/2) {
       hurt.trigger();
       p1Score++;
-      b.display();
+      //b.display();
       //p2Laser = false;
     }
   }
