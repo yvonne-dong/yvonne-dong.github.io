@@ -39,10 +39,10 @@ function draw(){
   } else {
 
   	
-    // for (int i = 0; i < 501; i = i+20) {
-    //   fill(255);
-    //   rect(width/2, i, 12, 12);
-    // }
+    for (var i = 0; i < 501; i = i+20) {
+      fill(255);
+      rect(width/2, i, 12, 12);
+    }
 
     drawScore();
 
@@ -53,9 +53,10 @@ function draw(){
 
   	p1.update();
   	p1.display();
-
+  	p1.laserCollision();
   	p2.update();
-  	p2.display(); 	
+  	p2.display();
+  	p2.laserCollision(); 	
   }
 }
 
@@ -237,6 +238,17 @@ function Paddle(whichPlayer){
     rectMode(CENTER);
     rect(this.pos.x, this.pos.y, w, h);
   }
+
+  this.laserCollision = function(){
+  	if (p1.laserPos == p2.pos.x && p1.laserPosY > p2.pos.y - p2.h/2 
+      && p1.laserPosY < p2.pos.y + p2.h/2) {
+      p2Score ++;
+    }
+    if (p2.laserPos == p1.pos.x && p2.laserPosY > p1.pos.y - p1.h/2 
+      && p2.laserPosY < p1.pos.y + p1.h/2) {
+      p1Score ++;
+    }
+  }
 }
 
 
@@ -278,5 +290,3 @@ function keyReleased() {
     p1Down = false;
   }
 }
-
-
