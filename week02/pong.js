@@ -4,6 +4,8 @@ var img;
 var ball;
 var p1;
 var p2;
+var p1Score = 0;
+var p2Score = 0;
 
 var playerNum;
 var whichPlayer;
@@ -31,35 +33,96 @@ function setup() {
 
 function draw(){
   background(0);
-  ball.paddleCollision1();
-  ball.paddleCollision2();
-  ball.update();
-  ball.display();
+  var m = millis();
+  if (m < 500){
+  	drawIntro();
+  } else {
 
-  p1.update();
-  p1.display();
+  	
+    // for (int i = 0; i < 501; i = i+20) {
+    //   fill(255);
+    //   rect(width/2, i, 12, 12);
+    // }
 
-  p2.update();
-  p2.display();
+    drawScore();
+
+  	ball.paddleCollision1();
+  	ball.paddleCollision2();
+  	ball.update();
+  	ball.display();
+
+  	p1.update();
+  	p1.display();
+
+  	p2.update();
+  	p2.display(); 	
+  }
+}
+
+//Intro
+function drawIntro(){
+	textSize(20);
+  	fill(255);
+  	textAlign(LEFT);
+
+  	text('Laser Pong', 30, 100);
+  	text('Player 1 : [W]/[S] to move,[D] to fire', 30, 130);
+  	text('Player 2 : [UP]/[DOWN] to move,[LEFT] to fire', 30, 160);
+  	text('Avoid missing ball for high score', 30, 190);
+  	text('Do not shoot the ball', 30, 220);
+}
+
+//Score
+function drawScore(){
+	if (p1Score > p2Score) {      
+      rectMode(CORNER);
+      if (p1Score >= 11) {
+        fill(156, 207, random(150, 252), 300);
+      } else {
+        fill(156, 207, 252, 300);
+      }
+      rect(0, 0, width/2, height);
+    } else if (p2Score > p1Score) {
+      rectMode(CORNER);
+      if (p2Score >= 11) {
+        fill(255, random(150, 225), 122, 300);
+      } else {
+        fill(255, 225, 122, 300);
+      }
+      rect(width/2, 0, width, height);
+    }
+
+	textSize(36);
+    fill(255);
+    textAlign(CENTER, CENTER);
+    text(p1Score, width/2 - 100, 50);
+    text(p2Score, width/2 + 100, 50);    
 }
 
 //Ball
 function Ball(){
   this.pos = createVector(width/2, height/2);
   this.vel = createVector(0, 0);
-  var s = 60;
+  var s = 50;
   var angle = random(TWO_PI);
   var speed = 4;
   this.vel.x = cos(angle) * speed;
   this.vel.y = sin(angle) * speed;
 
   this.update = function() {
+  	if (p2Score >= 11){
+  		text("Win!", width/2 + 100, 100);
+  	} else if (p1Score >= 11){
+  		text("Win!", width/2 - 100, 100);
+  	} else if (p1Score < 11 || p2Score < 11) {
   	if (this.pos.x < -20){
-  	  this.pos.x = width/2;
-  	  this.pos.y = height/2;
+  		p2Score++;
+  		this.pos.x = width/2;
+  		this.pos.y = height/2;
   	} else if (this.pos.x > width + 20) {
-  	  this.pos.x = width/2;
-  	  this.pos.y = height/2;
+  		p1Score++;
+  		this.pos.x = width/2;
+  		this.pos.y = height/2;
   	}
 
   	if (this.pos.y < 20 || this.pos.y > height - 20) {
@@ -67,6 +130,7 @@ function Ball(){
       }
 
      this.pos.add(this.vel);
+ 	}
   };
 
   this.display = function(){
@@ -81,7 +145,7 @@ function Ball(){
 
   this.paddleCollision1 = function (){
     if (this.pos.x+s/2 > p1.pos.x && this.pos.x-s/2 < p1.pos.x) {
-      if (this.pos.y+s/2 > p1.pos.y && this.pos.y-s/2 < p1.pos.y) {
+      if (this.pos.y+s > p1.pos.y && this.pos.y-s < p1.pos.y) {
         this.vel.x *= -1;
       }
     }
@@ -89,7 +153,7 @@ function Ball(){
 
   this.paddleCollision2 = function (){
     if (this.pos.x+s/2 > p2.pos.x && this.pos.x-s/2 < p2.pos.x) {
-      if (this.pos.y+s/2 > p2.pos.y && this.pos.y-s/2 < p2.pos.y) {
+      if (this.pos.y+s > p2.pos.y && this.pos.y-s < p2.pos.y) {
         this.vel.x *= -1;
       }
     }
