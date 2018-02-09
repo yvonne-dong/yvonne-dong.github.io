@@ -1,6 +1,7 @@
 var ball;
 var p1, p2;
 var studentC;
+
 var p1Up = false;
 var p1Down = false;
 var p2Up = false;
@@ -44,6 +45,8 @@ function draw() {
   //studentC.star(studentC.pos.x, studentC.pos.y, studentC.size1, studentC.size2, studentC.side);
   studentC.update();
   studentC.display();
+  studentC.collided(p1);
+  studentC.collided(p2);
 }
 
 // should this be global? 
@@ -213,13 +216,14 @@ function Paddle(num) {
 // 
 function studentColliders() {
   this.pos = createVector(100, 50);
-  this.speed = 5;
+  this.speed = 3;
   this.angle = random(TWO_PI);
   this.vel = createVector(cos(this.angle) * this.speed, sin(this.angle) * this.speed);
-  this.size1 = 5;
-  this.size2 = 30;
+  this.size1 = 6;
+  this.size2 = 20;
   this.side = 3;
   var point = this.side;
+  var scaleStar = 1;
 
   this.star = function(x, y, radius1, radius2, npoints) {
   var angle = TWO_PI / npoints;
@@ -240,34 +244,54 @@ function studentColliders() {
     if (this.pos.x < 10) {
       this.pos = createVector(width/2, height/2);
       point = 3;
+      scaleStar = 1;
     } else if (this.pos.x > width - 10) {
       this.pos = createVector(width/2, height/2);
       point = 3;
+      scaleStar = 1;
     }
 
     if (this.pos.y < margin + 10 || 
         this.pos.y > height - margin - 10) {
       this.vel.y *= -1;
       point ++;
+      scaleStar += 0.2;
+
+      if (scaleStar > 3){
+      	scaleStar = 1;
+      }
     }
     this.pos.add(this.vel);
+
+    if (point >= 15) {
+    	point = 3;
+    }
   }
 
   this.display = function() {
     // draw something here
     noStroke();
-    fill(map(sin(0), -1, 1, 100, 200));
+    fill(255, 215 - random(100), 0);
     push();
     translate(this.pos.x, this.pos.y);
-    rotate(frameCount / 200.0);
+    rotate(frameCount / 100.0);
+    scale(scaleStar);
     this.star(0, 0, this.size1, this.size2, point); 
     pop();
   }
 
-  // this.collided = function(other) {
-  //   // do something cool here! do something to yourself,
-  //   // and also something to the other thing?
-  // }
+  this.collided = function(p) {
+    // do something cool here! do something to yourself,
+    // and also something to the other thing?
+    if (this.pos.x + this.size2/2 > p.pos.x && this.pos.x + this.size2/2 < p.pos.x + p.width ||
+      this.pos.x - this.size2/2 > p.pos.x && this.pos.x - this.size2/2 < p.pos.x + p.width){
+    	if (this.pos.y > p.pos.y && this.pos.y < p.pos.y + p.height) {
+    		this.vel.x *= -1;
+      		point ++;
+      		scaleStar += 0.2;
+    	}
+    }
+  }
 }
 
 function keyPressed() {
