@@ -219,7 +219,7 @@ function studentColliders() {
   this.speed = 3;
   this.angle = random(TWO_PI);
   this.vel = createVector(cos(this.angle) * this.speed, sin(this.angle) * this.speed);
-  this.size1 = 6;
+  this.size1 = 10;
   this.size2 = 20;
   this.side = 3;
   var point = this.side;
@@ -251,19 +251,19 @@ function studentColliders() {
       scaleStar = 1;
     }
 
-    if (this.pos.y < margin + 10 || 
-        this.pos.y > height - margin - 10) {
+    if (this.pos.y < margin + 100 || 
+        this.pos.y > height - margin - 100) {
       this.vel.y *= -1;
       point ++;
       scaleStar += 0.2;
 
-      if (scaleStar > 3){
+      if (scaleStar > 4){
       	scaleStar = 1;
       }
     }
     this.pos.add(this.vel);
 
-    if (point >= 15) {
+    if (point >= 18) {
     	point = 3;
     }
   }
@@ -283,8 +283,8 @@ function studentColliders() {
   this.collided = function(p) {
     // do something cool here! do something to yourself,
     // and also something to the other thing?
-    if (this.pos.x + this.size2/2 > p.pos.x && this.pos.x + this.size2/2 < p.pos.x + p.width ||
-      this.pos.x - this.size2/2 > p.pos.x && this.pos.x - this.size2/2 < p.pos.x + p.width){
+    if (this.pos.x + 100 > p.pos.x && this.pos.x + 100 < p.pos.x + p.width ||
+      this.pos.x - 100 > p.pos.x && this.pos.x - 100 < p.pos.x + p.width){
     	if (this.pos.y > p.pos.y && this.pos.y < p.pos.y + p.height) {
     		this.vel.x *= -1;
       		point ++;
