@@ -1,25 +1,108 @@
+	body {
+		background-color: #fdf5e6;
+	}
+
 	a {
-		font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-		font-size: 20px;
+		font-family: 'Muli', sans-serif;
+  		font-style: normal;
+  		font-weight: 600;
+  		font-size: 20px;
 		text-decoration: none;
-		color: black;
-		margin: 30px;
+		color: #7a7a7a;
 
 	}
 	h1 {
-		font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 15px;
+		font-style: normal;
+  		font-weight: 300;
 		font-size: 40px;
 		text-decoration: none;
-		color: black;
+		color: #424242;
 		margin: 30px;
 	}
 
-	h2 {
-		font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-		font-size: 20px;
+
+	.button{
+		transition-duration: 0.4s;
+		line-height: 180px;
+  		text-align: center;
+  		vertical-align: middle;
+    	text-decoration: none;
+    	border: 1px solid #302626;
+    	width: 180px;
+    	height: 180px;
+    	color: #696969;
+    	padding: 20px;
+    	margin: 15px;
+    	display: inline-block;
+    	cursor: pointer;
+	}
+
+	.button:hover{
+		background-color: #7a7a7a;
+    	color: #fdf5e6;
+	}
+
+	.dropbtn {
+		font-family: 'Muli', sans-serif;
+  		font-style: normal;
+  		font-weight: 600;
+  		font-size: 20px;
 		text-decoration: none;
-		color: black;
-		margin: 30px;
-		border: 1px solid powderblue;
-    	padding: 30px;
+		color: #7a7a7a;
+		margin: 15px;		
+
+		background-color: #fdf5e6;
+    	transition-duration: 0.4s;
+		line-height: 180px;
+    	height: 180px;
+    	width: 180px;
+  		text-align: center;
+  		vertical-align: middle;
+    	text-decoration: none;
+    	border: 1px solid #302626;  
+    	cursor: pointer;
+	}
+
+	.dropbtn:hover{
+		background-color: #7a7a7a;
+    	color: #fdf5e6;
+	}
+
+	.buttondrop{
+		/*position: relative;*/
+		display: inline-block;
+	}
+
+	.buttondrop-content{
+		width: 180px;
+    	height: 180px;
+		display: none;
+    	position: absolute;
+    	background-color: #a3a3a3;
+    	min-width: 180px;
+    	/*z-index: 1;*/
+	}
+
+	.buttondrop-content a {
+    	color: #696969;
+    	padding: 10px;
+    	text-decoration: none;
+    	border: 1px solid #302626;
+    	display: block;
+	}
+
+	.buttondrop-content a:hover {	
+		color: #fdf5e6;
+	}
+
+
+	.buttondrop:hover .buttondrop-content {
+    	display: block;
+	}
+
+
+	.buttondrop:hover .button {
+    	background-color: #696969;
 	}
