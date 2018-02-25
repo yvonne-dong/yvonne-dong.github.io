@@ -2,6 +2,11 @@
 		background-color: #fdf5e6;
 	}
 
+	main{
+		margin-top: 30px;
+		display: inline-flex;
+	}
+
 	a {
 		font-family: 'Muli', sans-serif;
   		font-style: normal;
@@ -21,6 +26,7 @@
 		color: #424242;
 		margin: 30px;
 	}
+
 
 
 	.button{
@@ -73,6 +79,9 @@
 	.buttondrop{
 		/*position: relative;*/
 		display: inline-block;
+		padding:0;
+		
+
 	}
 
 	.buttondrop-content{
