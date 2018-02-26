@@ -192,7 +192,7 @@ function Paddle(num) {
 
 var Particle = function(position) {
   this.acceleration = createVector(0, 0.05);
-  this.velocity = createVector(10, 10);
+  this.velocity = createVector(-20, 20);
   this.position = createVector(width/2, height/2);
   this.lifespan = 1000.0;
 };

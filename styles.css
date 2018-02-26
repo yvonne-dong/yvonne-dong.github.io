@@ -61,9 +61,9 @@
 
 		background-color: #fdf5e6;
     	transition-duration: 0.4s;
-		line-height: 180px;
-    	height: 180px;
-    	width: 180px;
+		line-height: 222px;
+    	height: 222px;
+    	width: 222px;
   		text-align: center;
   		vertical-align: middle;
     	text-decoration: none;
@@ -77,32 +77,35 @@
 	}
 
 	.buttondrop{
-		/*position: relative;*/
+		position: relative;
 		display: inline-block;
-		padding:0;
-		
-
+		top: 20px;
 	}
 
 	.buttondrop-content{
-		width: 180px;
-    	height: 180px;
 		display: none;
     	position: absolute;
-    	background-color: #a3a3a3;
-    	min-width: 180px;
+    	/*min-width: 180px;*/
+
+    	width: 222px;
+    	/*background-color: #a3a3a3;*/
+    	padding-left: 15px;
     	/*z-index: 1;*/
 	}
 
 	.buttondrop-content a {
     	color: #696969;
     	padding: 10px;
+    	text-align: center;
+  		vertical-align: middle;
     	text-decoration: none;
     	border: 1px solid #302626;
     	display: block;
 	}
 
-	.buttondrop-content a:hover {	
+	.buttondrop-content a:hover {
+		transition-duration: 0.4s;	
+		background-color: #a3a3a3;
 		color: #fdf5e6;
 	}
 
@@ -111,7 +114,6 @@
     	display: block;
 	}
 
-
-	.buttondrop:hover .button {
+	/*.buttondrop:hover .button {
     	background-color: #696969;
-	}
+	}*/
