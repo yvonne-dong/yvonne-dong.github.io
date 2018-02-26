@@ -225,10 +225,6 @@ function draw() {
 
     case sceneState.COLLIDER:
       var gameTimer = millis();
-      // if (p1Score >= 12 || p2Score >= 12){
-      //   currentState = sceneState.END;
-      //   setUpScene(currentState);
-      // }
       if (int(millis()/1000) > 80){
         currentState = sceneState.END;
         setUpScene(currentState);
@@ -236,6 +232,7 @@ function draw() {
       break;
  
     case sceneState.END:
+    colliders.shift();
       if (keyOn) {
         currentState++;
         setUpScene(currentState);
