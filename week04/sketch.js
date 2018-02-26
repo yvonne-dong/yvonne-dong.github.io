@@ -82,6 +82,7 @@ function draw() {
         background(250, 150 - sin(frameCount * 0.02) * 60, 0);
         fill(255);
         textSize(30);
+        textFont('Verdana');
         textAlign(CENTER, CENTER);
         text("Instructions:", width/2, height/2-150);
         text("P1: W & S for up & down", width/2, height/2-100);
@@ -188,6 +189,7 @@ function draw() {
       background(250, 150 - sin(frameCount * 0.02) * 60, 0);
       fill(255);
       textSize(30);
+      textFont('Verdana');
       textAlign(CENTER, CENTER);
       text("The end", width/2, height/2-150);
       text("P1 score: " + p1Score, width/2, height/2-100);
@@ -278,6 +280,7 @@ function drawField() {
   //fill(255);
   noStroke();
   textSize(64);
+  textFont('Verdana');
   textAlign(CENTER, CENTER);
   fill(r1, g1, b);
   text(p1Score, width/2-50, 70);
@@ -323,8 +326,8 @@ function Ball() {
   };
 
   this.display = function() {
-    noStroke();
-    fill(255);
+    strokeWeight(1);
+    stroke(255);
     rectMode(CORNER);
     rect(this.pos.x, this.pos.y, this.width, this.height);
   }
@@ -367,8 +370,8 @@ function Paddle(num) {
   }
 
   this.display = function() {
-    noStroke();
-    fill(255);
+    strokeWeight(1);
+    stroke(255);
     rectMode(CORNER);
     rect(this.pos.x, this.pos.y, this.width, this.height);
   }
