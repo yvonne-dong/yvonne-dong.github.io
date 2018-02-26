@@ -34,7 +34,7 @@ function setup() {
 function draw(){
   background(0);
   var m = millis();
-  if (m < 500){
+  if (m < 1000){
   	drawIntro();
   } else {
 
