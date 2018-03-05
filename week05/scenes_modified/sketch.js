@@ -29,6 +29,7 @@ function setup() {
   createCanvas(800, 800, WEBGL);
   pg = createGraphics(400,400);
   CreateScenesFromData(sceneData.scenes);
+  selectSFX = loadSound('assets/Blip_Select.wav');
 }
 
 function draw() {
@@ -89,23 +90,42 @@ function Scene(sceneText, options, nextScenes, side, blue, x, y) {
     triangle(100, -20, 140, 0, 100, 20);
     triangle(-20, 100, 0, 140, 20, 100);
     pop();
-    push();
-    translate(this.x, this.y, 0);
+    //push();
+    //translate(this.x, this.y, 0);
     
     //fill(255, 0, blue + sin(frameCount * 0.05) * 80, 50);
-    normalMaterial();
+    //normalMaterial();
     //stroke(255, 0, blue + sin(frameCount * 0.05) * 80);
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
-    rotateZ(frameCount * 0.01);
-    strokeWeight(1);
-    sphere(50, this.side, this.side - 2);
-    pop();
+    // rotateX(frameCount * 0.01);
+    // rotateY(frameCount * 0.01);
+    // rotateZ(frameCount * 0.01);
+    // strokeWeight(1);
+    // sphere(50, this.side, this.side - 2);
+    // pop();
+
+
+    for(var j = 0; j < 5; j++){
+      push();
+        for(var i = 0; i < 10; i++){
+          translate(sin(frameCount * 0.01 + j) * 10, sin(frameCount * 0.01 + j) * 10, i * 8);
+          rotateZ(frameCount * 0.001);
+          push();
+          translate(this.x, this.y, 0);
+          // normalMaterial();
+          strokeWeight(0.5);
+          stroke(255, 0, blue + sin(frameCount * 0.05) * 80);
+          fill(255, 0, blue + sin(frameCount * 0.05) * 80, 50);
+          sphere(30, this.side, this.side - 2);
+          pop();
+        }
+      pop();
+    }
   }
 }
 
 function keyPressed() {
   var numberPressed = parseInt(key);
+  selectSFX.play();
   var newScene = scenes[currentScene].nextScenes[numberPressed - 1];
   if (newScene !== undefined) {
     currentScene = newScene;

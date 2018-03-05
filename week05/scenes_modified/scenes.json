@@ -1,7 +1,7 @@
 {
   "scenes": [
     { 
-      "side": 4,
+      "side": 3,
       "blue": [5, 10, 50, 100, 200],
       "x":0,
       "y":0,
@@ -10,36 +10,36 @@
       "nextScenes": [1]
     },
     {
-      "side": 5,
+      "side": 4,
       "blue": [5, 10, 50, 100, 200],
       "x":0,
-      "y":-200,
+      "y":0,
       "sceneText": "scene 1",
       "options": ["2", "3"],
       "nextScenes": [2, 3]
     },
     {
-      "side": 8,
+      "side": 5,
       "blue": [5, 10, 50, 100, 200],
-      "x":-200,
+      "x":0,
       "y":0,
       "sceneText": "scene 2",
       "options": ["3", "4"], 
       "nextScenes": [3, 4] 
     },
     {
-      "side": 10,
+      "side": 8,
       "blue": [5, 10, 50, 100, 200],
       "x":0,
-      "y":200,
+      "y":0,
       "sceneText": "scene 3",
       "options": ["4", "0"],
       "nextScenes": [4, 0]
     },
     {
-      "side": 15,
+      "side": 10,
       "blue": [5, 10, 50, 100, 200],
-      "x":200,
+      "x":0,
       "y":0,
       "sceneText": "scene 4",
       "options": ["0", "1", "2", "3"],
