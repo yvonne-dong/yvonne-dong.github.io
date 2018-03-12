@@ -1,0 +1,39 @@
+{
+  "scenes": [
+    { 
+      "instruction text": "instructions",
+      "proceed to another level (hit enter to trigger)": [1]
+    },
+    {
+      "shape of asteroid l1": ["a list of the kinds of shapes"],
+      "shape of asteroid when being hit": ["a list of the kinds of shapes"],
+      "sceneText to display the level": "Level 1",
+      "position of asteroid group": "(position, position)",
+      "proceed to another level - control by score": [2]
+    },
+    {
+      "shape of asteroid l2": ["a list of the kinds of shapes"],
+      "shape of asteroid when being hit": ["a list of the kinds of shapes"],
+      "sceneText to display the level": "Level 1",
+      "position of asteroid group": "(position, position)",
+      "proceed to another level": [3]
+    },
+    {
+      "shape of asteroid l3": ["a list of the kinds of shapes"],
+      "shape of asteroid when being hit": ["a list of the kinds of shapes"],
+      "sceneText to display the level": "Level 1",
+      "position of asteroid group": "(position, position)",
+      "proceed to another level": [4]
+    },
+    {
+      "shape of asteroid lfinal": ["a large asteroid?"],
+      "shape of asteroid when being hit": ["a list of the kinds of shapes"],
+      "sceneText to display the level": "Level 1",
+      "position of asteroid group": "(position, position)",
+      "proceed to another level": [5]
+    },
+    {
+      "ending text": "GAME OVER! + score"
+    }
+  ]
+}
