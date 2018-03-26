@@ -27,6 +27,7 @@ var asteroids;
 //player
 var hand;
 var handImage, bulletImage, particleImage;
+var catimg;
 var MARGIN = 40;
 
 function preload(){
@@ -34,6 +35,7 @@ function preload(){
   bulletImage = loadImage("assets/asteroids_bullet.png");
   handImage = loadImage("assets/hand1.png");
   particleImage = loadImage("assets/asteroids_particle.png");
+  catimg = loadImage("assets/cat1.png");
 }
 
 function setup() {
@@ -41,6 +43,7 @@ createCanvas(800,600);
 hand = new Hand();
 asteroids = new Group();
 bullets = new Group();
+imageMode(CENTER);
 }
 
 
@@ -50,14 +53,25 @@ function draw() {
   keyOn = false; 
 }
 
+function catbg(x, y){
+  var cat = createSprite(x, y);
+  var img1  = loadImage("assets/cat1.png");
+  cat.addImage(img1, x, y);
+  cat.setSpeed(cos(frameCount * 0.01) * 400, sin(frameCount * 0.05) * 10);
+  cat.life = 2;
+}
+
 
 function drawScene(scene) {
   switch (currentState){
     case sceneState.INTRO:
+      var catcount = 0;
       gameTimer = 100;
       if (introTimer > 100){
         background(0);
         fill(255, 186, 205);
+        catbg(width/2, height-100);
+        tint(200, 200);
         textSize(20);
         textFont('Verdana');
         textAlign(CENTER, CENTER);
@@ -66,15 +80,18 @@ function drawScene(scene) {
         text("UP ARROW TO MOVE FORWARD", width/2, height/2-50);
         text("PRESS SPACE BAR TO HIT HIGHFIVE!", width/2, height/2);
         textSize(40);
+        fill(255, 100, 215 - sin(frameCount * 0.05) * 60);
         text("PRESS ENTER TO START", width/2, height/2+100);
+        drawSprites(); 
       } else {
         background(0);
-        fill(255, 186, 205);
+        fill(255, 100, 215 - sin(frameCount * 0.05) * 60);
         textSize(40);
         textFont('Verdana');
         textAlign(CENTER, CENTER);
-        text("HIGHFIVE", width/2, height/2);
+        tint(200, 200);
         introTimer ++;
+        text("HIGHFIVE", width/2, height/2);
       }
     break;
 
@@ -251,7 +268,7 @@ function drawScene(scene) {
         for ( var i = 0; i < asterdata.asteroiddata[3].asternum; i ++){
           var pos1 = createVector(asterdata.asteroiddata[3].asterpos[i].x, 
           asterdata.asteroiddata[3].asterpos[i].y);
-          var rotation = asterdata.asteroiddata[3].rotate[int(random(5))];
+          var rotation = asterdata.asteroiddata[3].rotate[int(random(1))];
           createAsteroid(6, pos1.x , pos1.y, rotation, asterdata.asteroiddata[3].paw);
           count = 0;
         }
@@ -299,6 +316,7 @@ function drawScene(scene) {
       text("END", width/2, height/2-150);
       textSize(40);
       text("SCORE: "+score, width/2, height/2-100);
+      fill(255, 100, 215 - sin(frameCount * 0.05) * 60);
       text("PRESS ENTER TO RESTART!", width/2, height/2);
     break;
     default:
