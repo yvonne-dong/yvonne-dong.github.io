@@ -3,8 +3,8 @@
 	}
 
 	main{
-		margin-top: 30px;
 		display: inline-flex;
+		flex-wrap: wrap;
 	}
 
 	a {
@@ -24,10 +24,10 @@
 		font-size: 40px;
 		text-decoration: none;
 		color: #424242;
-		margin: 30px;
+		margin: 15px;
 	}
 
-
+	
 
 	.button{
 		transition-duration: 0.4s;
