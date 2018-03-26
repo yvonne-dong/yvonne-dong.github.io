@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MIDTERM</title>
+ <style> body {
+        padding: 0; 
+        margin-top: 30px; 
+        background: white; 
+        display: flex;
+        } </style>
+</head>
+
+<body>
+<div id="container">
+    <canvas id="myCanvas" height="450" width="450"></canvas>
+</div>
+<script src="p5.min.js"></script>
+<script src="p5.dom.js"></script> 
+<script> 
+
+var player;
+var hit = [];
+var element;
+var turnL = false;
+var turnR = false;
+var go = false;
+var back = false;
+
+var sceneState = {
+  P1: 0,
+  P2: 1,
+  P3: 2,
+  P4: 3
+}
+var keyOn = false;
+
+var currentState = sceneState.P1;
+
+
+function setup() {
+  createCanvas(600, 600);
+  player = new Player();
+  rectMode(CENTER);
+}
+
+function draw(){
+  drawScene(currentState);
+  checkTransition(currentState);
+  keyOn = false;
+}
+
+function element1(){
+    noStroke();
+    var xc = int(map(player.pos.x, 0, width, 0, 255));
+    var yc = int(map(player.pos.y, 0, height, 0, 255));
+    fill(xc * sin(frameCount * 0.02) + 100, yc * cos(frameCount * 0.02) + 100, 183);
+    ellipse(width/2, height/2, 150, 150);
+    noFill();
+    stroke(237, 229, 220);
+    strokeWeight(25);
+    strokeCap(SQUARE);
+    rect(width/2, height/2, 300, 300);
+    rect(width/2, height/2, 500, 500);
+    // de = dist(width/2, height/2, player.pos.x, player.pos.y);
+    // dr1 = dist(width/2, height/2, player.pos.x, player.pos.y);
+    // dr2 = dist(width/2, height/2, player.pos.x, player.pos.y);
+	}
+
+function element2(){
+    noFill();
+    stroke(219, 128, 43);
+    strokeWeight(18);
+    strokeCap(SQUARE);
+    e2WL = createVector(20, 300);
+    rect(width/2, height/2, 450, 500);
+    for (var i = 1; i < 10; i ++){
+      e2Pos = createVector(180 + i * 25, height/2 + 80 - i * 15);
+      noStroke();
+      if (player.pos.x > e2Pos.x - e2WL.x/2 && player.pos.x < e2Pos.x + e2WL.x/2){
+      	if (player.pos.y > e2Pos.y - e2WL.y/2 && player.pos.y < e2Pos.y + e2WL.y/2){
+        	fill(255, 100, 100);
+        	e2Pos.y += 30;
+        }
+      } else {
+        fill(250, 10, 10);
+      }
+      rect(e2Pos.x, e2Pos.y, e2WL.x, e2WL.y);
+      strokeWeight(20);
+      stroke(250, 0, 0);
+    }
+}
+
+function element3(){
+  for (var i = 16.8; i < 26.5; i += 0.5){
+    noStroke();
+    fill(191, 74, 1);
+    push();
+    translate(0, -780);
+    rect(width/2, i * 50, cos(i * 50) * i * 10 + sin(frameCount * 0.02) * player.pos.y, 1);
+    rect(width/2, i * 50 + 8, cos(i * 50) * i * 10 + sin(frameCount * 0.02) * player.pos.y, 2);
+    pop();
+  }
+}
+
+function element4(){
+  rectMode(CENTER);
+  noFill();
+  noStroke();
+  var r = map(player.pos.x, 0, width, 0, PI);
+  var g = map(player.pos.y, 0, height,0, PI);
+  var b = map(player.pos.x, 0, width, 0, PI);
+  for (var i = 1; i < 500; i += 100){
+    for (var j = 50; j < height/2 - 100; j += 50){
+    fill(sin(r) * i , sin(g) * j, 0);
+    stroke(255, 245, 234);
+    strokeWeight(8);
+    rect(100 + i , j , 100, 50);
+	}
+  }
+  for (var i = 1; i < 500; i += 100){
+    for (var j = height/2 + 100; j < height - 100; j += 50){
+    fill(sin(r) * j, 0, sin(b) * i);
+    stroke(255, 245, 234);
+    strokeWeight(8);
+    rect(100 + i , j , 100, 50);
+	}
+  }
+}
+
+function drawScene(scene) {
+  switch (currentState){
+    case sceneState.P1:
+      background(255, 249, 242);
+      element1();
+      fill(255, 249, 242);
+      noStroke();
+      rect(width/2, height-15, 50, 15);
+      fill(100, 100, 100, 100);
+	  textSize(15);
+	  textAlign(CENTER);
+	  textFont('Georgia');
+	  text('Agnes Martin, Untitled, 1960', width/2, height-15);
+      player.display();
+      player.checkMargin();
+      player.boost(go, back);
+      player.turn(turnL, turnR);
+      player.update();
+    break;
+
+    case sceneState.P2:
+      background(255, 254, 249);
+      element2();
+      fill(255, 254, 249);
+      noStroke();
+      rect(width/2, height-15, 50, 15);
+      fill(100, 100, 100, 100);
+	  textSize(15);
+	  textAlign(CENTER);
+	  textFont('Georgia');
+	  text('Donald Judd, Untitled (2-L), 1961-69', width/2, height-15);
+      player.display();
+      player.turn(turnL, turnR);
+      player.checkMargin();
+      player.boost(go, back);
+      player.update();
+    break;
+
+    case sceneState.P3:
+      background(255, 243, 224);
+      element3();
+      fill(255, 243, 224);
+      noStroke();
+      rect(width/2, height-15, 50, 15);
+      fill(100, 100, 100, 100);
+	  textSize(15);
+	  textAlign(CENTER);
+	  textFont('Georgia');
+	  text('Agnes Martin, The Moment (Egg), 1963', width/2, height-15);
+      player.display();
+      player.turn(turnL, turnR);
+      player.checkMargin();
+      player.boost(go, back);
+      player.update();
+    break;
+
+    case sceneState.P4:
+      background(255, 245, 234);
+      element4()
+      fill(255, 245, 234);
+      noStroke();
+      rect(width/2, height-15, 50, 15);
+      fill(100, 100, 100, 100);
+	  textSize(15);
+	  textAlign(CENTER);
+	  textFont('Georgia');
+	  text('Donald Judd, Untitled, 1991', width/2, height-15);
+      player.display();
+      player.turn(turnL, turnR);
+      player.checkMargin();
+      player.boost(go, back);
+      player.update();
+    break;
+
+    default:
+    break;
+  }
+}
+
+function checkTransition(scene){
+  switch(scene){
+    case sceneState.P1:
+    if (keyOn) {
+      currentState++;
+      setUpScene(currentState);
+    }
+    break;
+
+    case sceneState.P2:
+    if (keyOn) {
+      currentState++;
+      setUpScene(currentState);
+    }
+    break;
+
+    case sceneState.P3:
+    if (keyOn) {
+      currentState++;
+      setUpScene(currentState);
+    }
+    break;
+
+    case sceneState.P4:
+    if (keyOn) {
+      currentState++;
+      setUpScene(currentState);
+    }
+    if (currentState > 3){
+      currentState = 0;
+    }
+    break;
+
+    default:
+    break;
+  }
+}
+
+function setUpScene(scene){
+  switch (scene) {
+    case sceneState.P1:
+      break;
+    case sceneState.P2:
+      break;
+    case sceneState.P3:
+      break;
+    case sceneState.P4:
+      break;
+    default:
+    break;
+  }
+}
+
+function Player(){
+
+  this.pos = createVector(width/2, height/2);
+  this.vel = createVector(0, 0);
+  this.acc = createVector(0.5, 0.5);
+  this.rotation = -PI/2;
+  this.margin = createVector(2, 2);
+
+  this.checkMargin = function(){
+    if (this.pos.x < 0) {
+          this.pos.x = width - this.margin.x;
+        } else if (this.pos.x> width) {
+          this.pos.x = this.margin.x;
+        }
+
+        if (this.pos.y < 0){
+          this.pos.y = height - this.margin.y;
+        } else if (this.pos.y > height) {
+          this.pos.y = this.margin.y;
+        }
+  }
+
+  this.update = function(){
+        this.pos.add(this.vel);
+        this.vel.mult(0.98);
+  }
+
+  this.display = function(){
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.rotation + PI/2);
+    strokeWeight(2);
+    stroke(100, 100, 100, 100);
+    beginShape(LINES)
+    vertex(-10, 15);
+    vertex(0, -10);
+    vertex(0, -10);
+    vertex(10, 15);
+
+    vertex(-5, 20);
+    vertex(0, 10);
+    vertex(0, 10);
+    vertex(5, 20);
+    endShape();
+    pop();
+  }
+
+  this.turn = function(left, right){
+    if (left) {
+      this.rotation -= 0.2;
+    }
+    if (right) {
+      this.rotation += 0.2;
+    }   
+  }
+
+  this.boost = function (go, back){
+    if (go) {
+      var force = p5.Vector.fromAngle(this.rotation);
+      force.mult(0.1);
+      this.vel.add(force);
+    }
+    if (back){
+      var force = p5.Vector.fromAngle(this.rotation);
+      force.mult(-0.1);
+      this.vel.add(force);
+    }
+  }
+}
+
+
+
+function keyPressed() {
+  if (keyCode === ENTER) {
+    keyOn = true;
+  }
+  if (keyCode === LEFT_ARROW) {
+    turnL = true;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    turnR = true;
+  }
+  if (keyCode === UP_ARROW) {
+    go = true;
+  }
+  if (keyCode === DOWN_ARROW) {
+    back = true;
+  }
+}
+
+function keyReleased() {
+  if (keyCode === LEFT_ARROW) {
+    turnL = false;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    turnR = false;
+  }
+  if (keyCode === UP_ARROW) {
+    go = false;
+  }
+  if (keyCode === DOWN_ARROW) {
+    back = false;
+  }
+}
+
+</script>
+</body></html>
