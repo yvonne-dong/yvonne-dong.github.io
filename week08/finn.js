@@ -1,6 +1,6 @@
 
 var finn;
-var api = 'http://api.giphy.com/v1/gifs/search?q=';
+var api = 'https://api.giphy.com/v1/gifs/search?q=';
 var apiKey = '&api_key=NbkeYA73vYawk4C1tichQzt1eDDBlX6d';
 var units = '&limit=20';
 var img;
