@@ -21,7 +21,7 @@ function setup(){
   	buttonStyle();
 	  titleStyle();
   	text = createP("JODI: OXO");
-  	introduction = createP("DATE: 1998-06-04 to 1998-08-16");
+  	introduction = createP("DATE: 2018-02-07 to 2018-04-23");
   	textStyle();
   	url = createP("https://www.harvardartmuseums.org/visit/exhibitions/5664");
   	url.style('font-size', '15px');
