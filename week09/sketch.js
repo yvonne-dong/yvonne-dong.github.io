@@ -19,7 +19,7 @@ function setup(){
   	buttonElement.mouseOut(unhighlight);
   	buttonElement.mousePressed(buttonPressed);
   	buttonStyle();
-	titleStyle();
+	  titleStyle();
   	text = createP("JODI: OXO");
   	introduction = createP("DATE: 1998-06-04 to 1998-08-16");
   	textStyle();
@@ -28,6 +28,7 @@ function setup(){
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
   	url.mouseOut(unhighlight);
+    // url.mousePressed(getExhibition.greet);
   	exhibitionImg = createImg('https://ids.lib.harvard.edu/ids/view/437010373?height=675');
   	imgStyle();
   	
@@ -54,13 +55,15 @@ function buttonPressed() {
 	console.log(loading);
 }
 
+
 function getExhibition(data) {
 	exhibition = data;
 	exhibitionNum = int(random(9));
 	exhibitionImg.remove();
 	exhibitionImg = createImg(exhibition.records[exhibitionNum].primaryimageurl);
 	imgStyle();
-  	text.html(exhibition.records[exhibitionNum].title);
-  	introduction.html("DATE: " + exhibition.records[exhibitionNum].begindate + " to " + exhibition.records[exhibitionNum].enddate);
-  	url.html(exhibition.records[exhibitionNum].url);
+  text.html(exhibition.records[exhibitionNum].title);
+  introduction.html("DATE: " + exhibition.records[exhibitionNum].begindate + " to " + exhibition.records[exhibitionNum].enddate);
+  url.html(exhibition.records[exhibitionNum].url);
+
 }
