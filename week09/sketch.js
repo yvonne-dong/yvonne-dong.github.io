@@ -28,7 +28,7 @@ function setup(){
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
   	url.mouseOut(unhighlight);
-    // url.mousePressed(getExhibition.greet);
+    	url.mousePressed(urlPressed);
   	exhibitionImg = createImg('https://ids.lib.harvard.edu/ids/view/437010373?height=675');
   	imgStyle();
   	
@@ -66,4 +66,14 @@ function getExhibition(data) {
   introduction.html("DATE: " + exhibition.records[exhibitionNum].begindate + " to " + exhibition.records[exhibitionNum].enddate);
   url.html(exhibition.records[exhibitionNum].url);
 
+}
+
+function urlPressed() {
+	loadJSON('https://api.harvardartmuseums.org/exhibition?hasimage=1&page='
+		+page+'&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296', gotoPage);
+}
+
+function gotoPage(data){
+	var gotoLink = data.records[exhibitionNum].url
+	window.location.href = gotoLink;
 }
