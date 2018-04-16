@@ -12,7 +12,7 @@ function buttonStyle(){
   	buttonElement.style('background-color', 'white');
   	buttonElement.style('border', 'none');
   	buttonElement.style('padding', '10px');
-    buttonElement.style('padding-right', '38px');
+    buttonElement.style('padding-right', '28px');
   	buttonElement.style('text-align', 'center');
   	buttonElement.style('font-size', '20px');
   	buttonElement.style('color', 'blue');
