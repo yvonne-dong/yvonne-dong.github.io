@@ -25,6 +25,7 @@ function setup(){
   	textStyle();
   	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
 		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
+	createElement('br');
   	url.style('font-size', '15px');
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
