@@ -4,7 +4,7 @@ var introData; //store data for introduction
 var exhibitionNum; //exhibition id
 var buttonElement; //for generating random exhibition
 var exhibitionImg; //exhibition image
-var pageNum; //what page of the record
+var page = 0; //what page of the record
 var text; //exhibition name
 var title; //heading
 var introduction; //intro text
@@ -28,10 +28,11 @@ function setup(){
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
   	url.mouseOut(unhighlight);
-    	url.mousePressed(urlPressed);
+    url.mousePressed(urlPressed);
   	exhibitionImg = createImg('https://ids.lib.harvard.edu/ids/view/437010373?height=675');
   	imgStyle();
   	
+    console.log(page);
 }
 
 function highlight() {
@@ -74,6 +75,6 @@ function urlPressed() {
 }
 
 function gotoPage(data){
-	var gotoLink = data.records[exhibitionNum].url
-	window.location.href = gotoLink;
+    var gotoLink = data.records[exhibitionNum].url
+    window.open(gotoLink, '_blank');
 }
