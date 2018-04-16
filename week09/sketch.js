@@ -23,7 +23,8 @@ function setup(){
   	text = createP("JODI: OXO");
   	introduction = createP("DATE: 2018-02-07 to 2018-04-23");
   	textStyle();
-  	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664");
+  	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
+		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
   	url.style('font-size', '15px');
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
