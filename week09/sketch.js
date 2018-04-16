@@ -25,16 +25,14 @@ function setup(){
   	textStyle();
   	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
 		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
-	createElement('br');
   	url.style('font-size', '15px');
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
   	url.mouseOut(unhighlight);
     	url.mousePressed(urlPressed);
+	createElement('br');
   	exhibitionImg = createImg('https://ids.lib.harvard.edu/ids/view/437010373?height=675');
   	imgStyle();
-  	
-    console.log(page);
 }
 
 function highlight() {
