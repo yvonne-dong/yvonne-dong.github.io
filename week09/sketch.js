@@ -9,6 +9,7 @@ var text; //exhibition name
 var title; //heading
 var introduction; //intro text
 var url; //url to exhibition page
+var gotoLink;
 
 function setup(){
 	noCanvas();
@@ -25,7 +26,7 @@ function setup(){
   	textStyle();
 //   	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
 // 		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
-    	url = createP("https://www.harvardartmuseums.org/visit/exhibitions/5664");
+    url = createP("https://www.harvardartmuseums.org/visit/exhibitions/5664");
   	url.style('font-size', '15px');
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
@@ -72,11 +73,19 @@ function getExhibition(data) {
 }
 
 function urlPressed() {
-	loadJSON('https://api.harvardartmuseums.org/exhibition?hasimage=1&page='
-		+page+'&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296', gotoPage);
+	  console.log(page);
+    if (page == 0){
+      gotoLink = "https://www.harvardartmuseums.org/visit/exhibitions/5664";
+      window.open(gotoLink, '_blank');
+    } else {
+		loadJSON('https://api.harvardartmuseums.org/exhibition?hasimage=1&page='
+			+page+'&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296', gotoPage);
+    }
 }
 
 function gotoPage(data){
-    var gotoLink = data.records[exhibitionNum].url
-    window.open(gotoLink, '_blank');
+      gotoLink = data.records[exhibitionNum].url;
+      window.open(gotoLink, '_blank');
 }
+
+
