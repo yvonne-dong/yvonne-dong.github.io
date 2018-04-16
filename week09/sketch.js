@@ -19,20 +19,20 @@ function setup(){
   	buttonElement.mouseOut(unhighlight);
   	buttonElement.mousePressed(buttonPressed);
   	buttonStyle();
-	  titleStyle();
+	titleStyle();
   	text = createP("JODI: OXO");
   	introduction = createP("DATE: 2018-02-07 to 2018-04-23");
   	textStyle();
-  	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
-		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
-    // url = createP("https://www.harvardartmuseums.org/visit/exhibitions/5664");
+//   	url = createA("https://www.harvardartmuseums.org/visit/exhibitions/5664", 
+// 		      "https://www.harvardartmuseums.org/visit/exhibitions/5664");
+    	url = createP("https://www.harvardartmuseums.org/visit/exhibitions/5664");
   	url.style('font-size', '15px');
   	url.style('text-decoration', 'underline');
   	url.mouseOver(highlight);
   	url.mouseOut(unhighlight);
-    url.mousePressed(urlPressed);
-	  createElement('br');
-    createElement('br');
+    	url.mousePressed(urlPressed);
+// 	  createElement('br');
+//     createElement('br');
   	exhibitionImg = createImg('https://ids.lib.harvard.edu/ids/view/437010373?height=675');
   	imgStyle();
 }
