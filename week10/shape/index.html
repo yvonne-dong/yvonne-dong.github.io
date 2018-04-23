@@ -1,0 +1,181 @@
+<html>
+<head>
+    <title>week10</title>
+
+    <style>
+    	body{
+    		margin: 0;
+    		overflow: hidden;
+    	}
+        p{
+            font-size: 20px;
+            margin-left: 40%;
+            margin-top: 10px;
+        }
+        #myCanvas{
+            margin-left: 25%;
+            margin-top: 50pt;
+            border: 2px solid #7a7a7a;
+        }
+        #buttonU{
+            margin-left: 45%;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        #buttonD{
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        #buttonL{
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        #buttonR{
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="myCanvas"></canvas>
+    <p>use mouse to drag and move around the canvas</p>
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>
+<script>
+
+    var renderer, scene, camera,
+    myCanvas = document.getElementById('myCanvas');
+
+    renderer = new THREE.WebGLRenderer({canvas: myCanvas, antialias: true});
+    renderer.setClearColor(0xffffff);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth/1.8, window.innerHeight/1.8);
+
+    //CAMERA
+    camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 3000, 100000 );
+    camera.position.set(0, 0, 10000);
+    controls = new THREE.OrbitControls(camera);
+
+    //SCENE
+    scene = new THREE.Scene();
+
+    //LIGHTS
+    var light = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(light);
+
+    var light2 = new THREE.PointLight(0xffffff, 0.5);
+    scene.add(light2);
+  
+
+    var material = new THREE.MeshNormalMaterial({
+         //color: 0xffae35,
+         transparent: true,
+         opacity: 0.8,
+         wireframe: false,
+    });
+;
+
+    
+    //TorusKnotGeometry(radius : Float, tube : Float, tubularSegments : Integer, radialSegments : Integer, p : Integer, q : Integer)
+    //var geometry2 = new THREE.TorusKnotGeometry(100, 5, 20, 6, 7, 5);
+    var geometry2 = new THREE.TorusKnotGeometry(1000, 50, 20, 6, 7, 5);
+    var mesh2 = new THREE.Mesh(geometry2, material);
+    mesh2.position.set(0, 0, -100);
+    scene.add(mesh2);
+
+    var geometry3 = new THREE.PlaneGeometry(10000, 10000, 100, 100);
+    var mesh3 = new THREE.Mesh(geometry3, material);
+    mesh3.rotation.x = -90 * Math.PI / 180;
+    mesh3.position.y = -300;
+    scene.add(mesh3);
+
+    var delta = 0;
+    //RENDER LOOP
+    render();
+
+    function render() {
+        window.onload = function() {
+            var doc = document.body;
+            //up
+            var buttonUp = document.createElement('button');
+            buttonUp.innerHTML = "UP";
+            buttonUp.id = 'buttonU';
+            buttonUp.style = "width: 55px; height: 55px; text-align: center; vertical-align: middle; font-size:12px; transition-duration: 0.4s; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            buttonUp.onclick = function() {
+                console.log("pressed");
+                mesh2.position.y += 500;
+            };
+            buttonUp.onmouseover = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: white; background-color: #7a7a7a;";
+            }
+            buttonUp.onmouseleave = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            }
+            doc.appendChild(buttonUp);
+
+            //down
+            var buttonDown = document.createElement('button');
+            buttonDown.innerHTML = "DOWN";
+            buttonDown.id = 'buttonD';
+            buttonDown.style = "width: 55px; height: 55px; text-align: center; vertical-align: middle; font-size:12px; transition-duration: 0.4s; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            buttonDown.onclick = function() {
+                console.log("pressed");
+                mesh2.position.y -= 500;
+            };
+            buttonDown.onmouseover = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: white; background-color: #7a7a7a;";
+            }
+            buttonDown.onmouseleave = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            }
+            doc.appendChild(buttonDown);
+
+            //left
+            var buttonLeft = document.createElement('button');
+            buttonLeft.innerHTML = "LEFT";
+            buttonLeft.id = 'buttonL';
+            buttonLeft.style = "width: 55px; height: 55px; text-align: center; vertical-align: middle; font-size:12px; transition-duration: 0.4s; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            buttonLeft.onclick = function() {
+                console.log("pressed");
+                mesh2.position.x -= 500;
+            };
+            buttonLeft.onmouseover = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: white; background-color: #7a7a7a;";
+            }
+            buttonLeft.onmouseleave = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            }
+            doc.appendChild(buttonLeft);
+
+            //right
+            var buttonRight = document.createElement('button');
+            buttonRight.innerHTML = "RIGHT";
+            buttonRight.id = 'buttonR';
+            buttonRight.style = "width: 55px; height: 55px; text-align: center; vertical-align: middle; font-size:12px; transition-duration: 0.4s; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            buttonRight.onclick = function() {
+                console.log("pressed");
+                mesh2.position.x += 500;
+            };
+            buttonRight.onmouseover = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: white; background-color: #7a7a7a;";
+            }
+            buttonRight.onmouseleave = function(event) {
+                event.srcElement.style = "width: 55px; height: 55px; transition-duration: 0.4s; font-size: 12px; color: black; background-color: white; border: 2px solid #7a7a7a;";
+            }
+            doc.appendChild(buttonRight);
+        }
+        
+
+        delta += 0.1;
+        mesh2.position.NeedUpdate = true;
+        mesh2.rotation.z += 0.01;
+        controls.update();
+    	renderer.render(scene, camera);
+    	requestAnimationFrame(render);
+    }
+
+
+    </script>
+</body>
+</html>

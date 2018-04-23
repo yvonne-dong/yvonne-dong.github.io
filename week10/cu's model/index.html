@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>three js testing</title>
+	<style>
+		body{
+			margin: 0;
+			overflow: hidden;
+		}
+
+		canvas{
+			background: #4286f4;
+			/*margin-left: 25%;
+			margin-top: 20pt;*/
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<script src="three.js"></script>
+<!-- 	<script src="OrbitControls.js"></script>
+ -->	<script>
+		var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas'), antialias: true});
+		renderer.setClearColor(0x000000);
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(window.innerWidth, window.innerHeight);
+
+		var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 3000);
+		var scene = new THREE.Scene();
+
+		var light = new THREE.AmbientLight(0xff0000, 0.5);
+		scene.add(light);
+
+		var plight = new THREE.PointLight(0xffffff, 0.5);
+		scene.add(plight);
+
+		var loader = new THREE.JSONLoader();
+		loader.load('cu.json', handle_load);
+
+		var mesh;
+    	var mixer;
+
+		function handle_load(geometry, materials){
+			var material = new THREE.MeshLambertMaterial({morphTargets: true});
+        	mesh = new THREE.Mesh(geometry, material);
+        	scene.add(mesh);
+        	mesh.position.z = -5;
+
+        	mixer = new THREE.AnimationMixer(mesh);
+
+        	var clip = THREE.AnimationClip.CreateFromMorphTargetSequence('dance', geometry.morphTargets, 30);
+        	mixer.clipAction(clip).setDuration(8).play();
+		}
+
+		render();
+		var prevTime = Date.now();
+
+		function render(){
+			if (mixer){
+				var time = Date.now();
+				mixer.update((time-prevTime)* 0.001);
+				prevTime = time;
+
+			}
+			renderer.render(scene, camera);
+			requestAnimationFrame(render);
+		}
+	</script>
+</body>
