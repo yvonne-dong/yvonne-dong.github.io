@@ -40,9 +40,19 @@
 
     <canvas id="myCanvas"></canvas>
     <p>use mouse to drag and move around the canvas</p>
+    <!-- <input type="number" id="myinput"/> -->
+
     <script src="three.js"></script>
     <script src="OrbitControls.js"></script>
+
 <script>
+
+    // var myinput = document.getElementById('myinput');
+    // console.log(myinput);
+    // myinput.onchange = function() {
+    //     console.log("input");
+    // }
+
 
     var renderer, scene, camera,
     myCanvas = document.getElementById('myCanvas');
@@ -92,10 +102,18 @@
 
     var delta = 0;
     //RENDER LOOP
-    render();
 
-    function render() {
-        window.onload = function() {
+    // var inputX;
+    // inputX = document.createElement('input');
+    // // inputX.type = 'number';
+    // // inputX.value = 100;
+    // inputX.oninput = function(event) {
+    //     console.log(event);
+    // }
+    // document.body.appendChild(inputX);
+
+
+    window.onload = function() {
             var doc = document.body;
             //up
             var buttonUp = document.createElement('button');
@@ -165,8 +183,12 @@
             }
             doc.appendChild(buttonRight);
         }
-        
 
+    render();
+
+
+
+    function render() {
         delta += 0.1;
         mesh2.position.NeedUpdate = true;
         mesh2.rotation.z += 0.01;
