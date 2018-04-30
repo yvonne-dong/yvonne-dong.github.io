@@ -1,0 +1,234 @@
+<html>
+<head>
+    <title>d3d room testing</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <br>
+    <button onclick="initAudio4()">YELLOW</button>
+    <button onclick="initAudio3()">CYAN</button>
+    <button onclick="initAudio2()">GREEN</button>
+    <button onclick="initAudio1()">RED</button>
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src = "resonance-audio.min.js"></script>
+    <script>
+
+    var renderer,
+        scene,
+        camera,
+        video,
+        myCanvas = document.getElementById('myCanvas');
+
+    let audioContext, audioContext2, audioContext3, audioContext4;
+    let audioElement, audioElement2, audioElement3, audioElement4;
+    let audioScene, audioScene2, audioScene3, audioScene4;
+    let source, source2, source3, source4;
+    let dimensions = {
+      width: 40, height: 25, depth: 40,
+    };
+    let materials = {
+      left: 'marble', right: 'marble',
+      front: 'marble', back: 'marble',
+      up: 'transparent', down: 'marble',
+    };
+    let defaultSourceRadius = 3;
+    let audioReady = false;
+
+
+    //RENDERER
+
+    renderer = new THREE.WebGLRenderer({
+      canvas: myCanvas, 
+      antialias: true,
+      alpha: true
+    });
+
+    renderer.autoClear = false;
+    renderer.setClearColor(0xffffff, 0);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
+
+    //CAMERA
+    camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+    // //camera.position.set( 400, 200, 0 );
+    // camera.position.set( 0, 0, 400 );
+    //camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+    camera.position.set(5, 0, 5);
+
+    // controls
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    //controls.enableDamping = true; 
+    //controls.dampingFactor = 0.3;
+    //controls.screenSpacePanning = false;
+    controls.maxDistance = 50;
+    controls.minDistance = 0;
+    
+    //SCENE
+    scene = new THREE.Scene();
+
+    let room = new THREE.Mesh(
+        new THREE.BoxGeometry(
+          dimensions.width, dimensions.height, dimensions.depth),
+        new THREE.MeshPhongMaterial({
+          side: THREE.BackSide,
+        })
+    );
+    scene.add(room);
+
+    let cameraLight = new THREE.PointLight(0xffffff, 0.9, 100);
+    cameraLight.position.set(camera.position.x, camera.position.y,
+    camera.position.z);
+    scene.add(cameraLight);
+
+    let ceilingLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    ceilingLight.position.set(0, 10, 0);
+    scene.add(ceilingLight);
+
+    //r
+    mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 2),
+        new THREE.MeshPhongMaterial({
+          color: 0xff0000,
+        })
+    );
+    mesh.position.set(5, -8, -20);
+    scene.add(mesh);
+
+    //g
+    mesh2 = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 2),
+        new THREE.MeshPhongMaterial({
+          color: 0x00ff00,
+        })
+    );
+    mesh2.position.set(-10, 5, -20);
+    scene.add(mesh2);
+
+    //c
+    mesh3 = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 2),
+        new THREE.MeshPhongMaterial({
+          color: 0x00ffff,
+        })
+    );
+    mesh3.position.set(-20, 5, -10);
+    scene.add(mesh3);
+
+    //y
+    mesh4 = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 2),
+        new THREE.MeshPhongMaterial({
+          color: 0xffff00,
+        })
+    );
+    mesh4.position.set(-20, 8, 5);
+    scene.add(mesh4);
+
+
+    function initAudio1() {
+      // Create audio scene.
+      audioContext = new (window.AudioContext || window.webkitAudioContext);
+      audioScene = new ResonanceAudio(audioContext, {
+        ambisonicOrder: 3,
+        dimensions: dimensions,
+        materials: materials,
+      });
+      source = audioScene.createSource();
+      audioElement = document.createElement('audio');
+      audioElement.src = 'assets/BellDesk.wav';
+      audioElement.crossOrigin = 'anonymous';
+      audioElement.load();
+      //audioElement.loop = true;
+      audioElementSource = audioContext.createMediaElementSource(audioElement);
+      audioElementSource.connect(source.input);
+      audioScene.output.connect(audioContext.destination);
+      source.setPosition(mesh.position.x, mesh.position.y, mesh.position.z);
+      audioElement.play();
+    }
+
+    function initAudio2() {
+      // Create audio scene.
+      audioContext2 = new (window.AudioContext || window.webkitAudioContext);
+      audioScene2 = new ResonanceAudio(audioContext2, {
+        ambisonicOrder: 3,
+        dimensions: dimensions,
+        materials: materials,
+      });
+      source2 = audioScene2.createSource();
+      audioElement2 = document.createElement('audio');
+      audioElement2.src = 'assets/ToyTrain.wav';
+      audioElement2.crossOrigin = 'anonymous';
+      audioElement2.load();
+      //audioElement.loop = true;
+      audioElementSource2 = audioContext2.createMediaElementSource(audioElement2);
+      audioElementSource2.connect(source2.input);
+      audioScene2.output.connect(audioContext2.destination);
+      source2.setPosition(mesh2.position.x, mesh2.position.y, mesh2.position.z);
+      audioElement2.play();
+    }
+
+    function initAudio3() {
+      // Create audio scene.
+      audioContext3 = new (window.AudioContext || window.webkitAudioContext);
+      audioScene3 = new ResonanceAudio(audioContext3, {
+        ambisonicOrder: 3,
+        dimensions: dimensions,
+        materials: materials,
+      });
+      source3 = audioScene3.createSource();
+      audioElement3 = document.createElement('audio');
+      audioElement3.src = 'assets/MatchStrike.wav';
+      audioElement3.crossOrigin = 'anonymous';
+      audioElement3.load();
+      //audioElement.loop = true;
+      audioElementSource3 = audioContext3.createMediaElementSource(audioElement3);
+      audioElementSource3.connect(source3.input);
+      audioScene3.output.connect(audioContext3.destination);
+      source3.setPosition(mesh3.position.x, mesh3.position.y, mesh3.position.z);
+      audioElement3.play();
+    }
+
+    function initAudio4() {
+      // Create audio scene.
+      audioContext4 = new (window.AudioContext || window.webkitAudioContext);
+      audioScene4 = new ResonanceAudio(audioContext4, {
+        ambisonicOrder: 3,
+        dimensions: dimensions,
+        materials: materials,
+      });
+      source4 = audioScene4.createSource();
+      audioElement4 = document.createElement('audio');
+      audioElement4.src = 'assets/DoorKnock.wav';
+      audioElement4.crossOrigin = 'anonymous';
+      audioElement4.load();
+      //audioElement.loop = true;
+      audioElementSource4 = audioContext4.createMediaElementSource(audioElement4);
+      audioElementSource4.connect(source4.input);
+      audioScene4.output.connect(audioContext4.destination);
+      source4.setPosition(mesh4.position.x, mesh4.position.y, mesh4.position.z);
+      audioElement4.play();
+    }
+
+
+    //RENDER LOOP
+    render();
+
+    function render() {
+        // var time = Date.now() * 0.0005;
+        // var t = Math.sin(time) * 0.1;
+
+        // //mesh.position.y += t;
+        // //mesh.position.x -= t;
+        // mesh.position.z += t;
+        controls.update();
+        requestAnimationFrame(render);
+        renderer.render(scene, camera);  
+    }
+
+    </script>
+</body>
+</html>
