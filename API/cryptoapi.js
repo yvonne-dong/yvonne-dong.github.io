@@ -7,15 +7,13 @@
 //https://api.giphy.com/v1/gifs/search?q=doge&api_key=W6EoCb8070RoeMOEg3CTCdAPcugZv2Rc&limit=5
 
 //fetch('https://www.worldcoinindex.com/apiservice/ticker?key=d7vGJQ7ho5Xl790ZPBpegjWfBGPntU&label=ethbtc-ltcbtc&fiat=btc')
-fetch('https://www.worldcoinindex.com/apiservice/ticker?key=d7vGJQ7ho5Xl790ZPBpegjWfBGPntU&label=ethbtc-ltcbtc&fiat=btc')
+fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
 	.then(function(response){
 		return response.json();
 	})
 	.then(function(data){
 		render(data);
 	});
-
-var labelSpan = document.querySelector('#label');
 // var nameSpan = document.querySelector('#name');
 // var priceSpan = document.querySelector('#price');
 // var volumeSpan = document.querySelector('#volume');
