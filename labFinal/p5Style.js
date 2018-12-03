@@ -1,48 +1,85 @@
 
 function titleStyle(){
     title.style('position', 'absolute');
-    title.style('left', '330px');
-    title.style('top', '20px');
-    title.style('font-family', 'Arial Black','Gadget', 'sans-serif');
-    title.style('width', '180px');
+    title.style('left', '520px');
+    title.style('top', '10px');
+    title.style('font-family', 'Muli', 'sans-serif');
+    title.style('font-size', '40px');
+    title.style('width', '300px');
     title.style('padding', '10px');
-    title.style('border', '5px solid blue');
     title.style('color', '#383838');
-    title.style('background-color', 'white');
+    //title.style('border', '5px solid blue');
 }
 
 function mostActivetitleStyle(){
     mostActivetitle.style('position', 'absolute');
-    mostActivetitle.style('left', '635px');
-    mostActivetitle.style('top', '410px');
-    mostActivetitle.style('font-family', 'Arial Black','Gadget', 'sans-serif');
-    mostActivetitle.style('width', '270px');
+    mostActivetitle.style('left', '520px');
+    mostActivetitle.style('top', '460px');
+    mostActivetitle.style('font-family', 'Oswald', 'sans-serif');
+    mostActivetitle.style('font-size', '20px');
+    mostActivetitle.style('width', '600px');
     mostActivetitle.style('padding', '10px');
     // mostActivetitle.style('border', '5px solid blue');
     mostActivetitle.style('color', '#383838');
 }
 
+// inp.style('top', '580px');
+// inp.style('left', '528px');
+function inputStyle(){
+    inp.style('text-align', 'center');
+    inp.attribute('placeholder', 'search name + press enter');
+    inp.style('width', '206px');
+    inp.style('height', '40px');
+    inp.style('font-size', '15px');
+    inp.style('position', 'absolute');
+    inp.style('left', '1017px');
+    inp.style('top', '100px');
+    inp.style('border', 'none');
+    inp.style('border-bottom', '3px solid #383838');
+    inp.style('background-color', 'transparent');
+}
+
+// buttonElement.style('left', '730px');
 function buttonStyle(){
     buttonElement.style('position', 'absolute');
-    buttonElement.style('left', '640px');
-    buttonElement.style('top', '660px');
-    buttonElement.style('background-color', 'white');
-    buttonElement.style('border', 'none');
+    buttonElement.style('left', '1027px');
+    buttonElement.style('top', '60px');
+    buttonElement.style('background-color', 'transparent');
+    buttonElement.style('width', '150px');
     buttonElement.style('padding', '10px');
     buttonElement.style('text-align', 'center');
-    buttonElement.style('font-size', '18px');
-    buttonElement.style('color', 'blue');
-    buttonElement.style('border', '5px solid blue');
-    buttonElement.style('font-family', 'Arial Black','Gadget', 'sans-serif');
+    buttonElement.style('font-size', '15px');
+    buttonElement.style('color', '#383838');
+    buttonElement.style('border', '3px solid #383838');
+    buttonElement.style('font-family', 'Muli', 'sans-serif');
     buttonElement.style('cursor', 'pointer');
 }
 
+// homeButtonElement.style('left', '900px');
+function homeButtonStyle(){
+    homeButtonElement.style('position', 'absolute');
+    homeButtonElement.style('left', '1115px');
+    //580px
+    homeButtonElement.style('top', '580px');
+    homeButtonElement.style('background-color', '#383838');
+    homeButtonElement.style('width', '110px');
+    homeButtonElement.style('padding', '10px');
+    homeButtonElement.style('text-align', 'center');
+    homeButtonElement.style('font-size', '15px');
+    homeButtonElement.style('color', '#e8e8e8');
+    homeButtonElement.style('border', '3px solid #383838');
+    homeButtonElement.style('font-family', 'Muli', 'sans-serif');
+    homeButtonElement.style('cursor', 'pointer');
+}
+
 function imgStyle(){
-    // img.style('position', 'absolute');
-    // img.style('margin-left', '10px');
-    img.style('margin-top', '400px');
-	  img.style('width', '45%');
-  	img.style('height', '45%');
-  	img.style('padding', '10px');
-  	img.style('border', '5px solid #383838');
+    img.style('position', 'absolute');
+    img.style('object-fit', 'cover');
+    img.style('left', '0px');
+    img.style('top', '0px');
+    // img.style('margin-top', '400px');
+	img.style('width', '500px');
+  	img.style('height', '640px');
+ //  	img.style('padding', '10px');
+ //  	img.style('border', '5px solid #383838');
 }
