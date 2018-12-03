@@ -92,7 +92,7 @@ function draw(){
 		techniqueTypes(storeTech[i].value, storeTech[i].count, i*40);
 	}
 	for (var j = 0; j < storeDate.length; j ++) {
-		dateGraph(storeDate[j].value, storeDate[j].count, j*40+30);
+		dateGraph(storeDate[j].value, storeDate[j].count, j*20+20);
 	}
 
 	//setup two graphs
@@ -131,7 +131,7 @@ function enterPressed(){
 	dataReset();
 	var searchInput = inp.value();
 	searchInput = searchInput.split(' ').join('+');
-	var searchUrl = 'https://api.harvardartmuseums.org/object?person='+searchInput+'&size=100&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
+	var searchUrl = 'https://api.harvardartmuseums.org/object?person='+searchInput+'&size=80&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 	// var searchUrl = 'https://api.harvardartmuseums.org/person?q='+inp.value()+'&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 	loadJSON(searchUrl, getPersonObj);
 	console.log('result for '+searchInput);
@@ -251,11 +251,11 @@ function getPersonObj(data){
 			imgId = data.records[i].id;
 			mostActivetitle.html('- '+data.records[i].title);
 			//document.body.style.backgroundColor = data.records[i].colors[0].css3;
-			bgColor = data.records[i].colors[0].css3;
+			// bgColor = data.records[i].colors[0].css3;
 			// console.log(data.records[i].colors);
 		}
 	}	
-	console.log(imgId);
+
  	var searchImgUrl = 'https://api.harvardartmuseums.org/image/'+imgId+'?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
  	loadJSON(searchImgUrl, getObjImage);
 
@@ -286,9 +286,16 @@ function dateGraph(date, dateCount, posX){
 	var timelineDate;
 	this.objDate = date;
 	this.dateCount = dateCount*10;
-	this.posX = posX;
-	this.posY = height/2+sin(this.posX/10)*10;
-	this.datePosY = this.posY+this.dateCount/2+5;
+	if (posX > width/2+100) {
+		this.posX = posX-(width/2+100);
+		this.posY = height/2+50;
+	} else if (posX <= width/2+100) {
+		this.posX = posX;
+		this.posY = height/2-50;
+	}
+	
+	
+	this.datePosY = this.posY+sin(this.posX/10)*20+this.dateCount/2+10;
 	this.countPosY = this.datePosY+20;
 	
 	stroke(56);
@@ -300,8 +307,8 @@ function dateGraph(date, dateCount, posX){
 	textSize(10);
 	textStyle(NORMAL);
 	fill(56);
-	text(dateCount +' works', this.posX, this.datePosY+10);
-	text('in ' + this.objDate, this.posX, this.countPosY);
+	// text(dateCount +' works', this.posX, this.datePosY+10);
+	text(this.objDate, this.posX, this.countPosY);
 	
 	//fill(100);
 	// line(10, height/2-50, width/2-10, height/2-50);
