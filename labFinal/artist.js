@@ -207,7 +207,7 @@ function getObjImage(data){
 		imgStyle();
 		document.body.style.backgroundColor = color(bgColor);
 		background(bgColor);
-		console.log(bgColor);		
+		// console.log(bgColor);		
 	}
 }
 
@@ -250,44 +250,21 @@ function getPersonObj(data){
 			mostActiveUrl = data.records[i].url;
 			imgId = data.records[i].id;
 			mostActivetitle.html('- '+data.records[i].title);
-			// bgColor = data.records[i].colors[0].css3;
-			console.log(data.records[i].colors);
+			//document.body.style.backgroundColor = data.records[i].colors[0].css3;
+			bgColor = data.records[i].colors[0].css3;
+			// console.log(data.records[i].colors);
 		}
-		
-		//var bgColor = data.records[i].colors[0];
-		// document.body.style.backgroundColor = bgColor;
 	}	
-
-	// //create image for most viewed work
-	// if (imgId == null && bgColor == null){
-	// 	img.remove();
-	// 	img = createImg('assets/notFound.png');
-	// 	imgStyle();
-	// 	bgColor = color(232);
-	// 	console.log('no image found');
-	// 	console.log('no color found');
-	// } else {
-	// 	img.remove();
-	// 	img = createImg(imgId);
-	// 	imgStyle();
-	// 	document.body.style.backgroundColor = color(bgColor);
-	// 	background(bgColor);
-	// 	console.log(bgColor);		
-	// }
-
-	
-	//display title and website of the most viewed work
-	console.log(mostActivetitle);
- 	console.log(mostActiveUrl);	
+	console.log(imgId);
  	var searchImgUrl = 'https://api.harvardartmuseums.org/image/'+imgId+'?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
  	loadJSON(searchImgUrl, getObjImage);
 
 //--------------------reference: https://gist.github.com/ralphcrisostomo/3141412--------------------
 	//count the sum of used techniques and dates
 	storeTech = countElements(testTech);
-  	console.log(storeTech);
+  	// console.log(storeTech);
   	storeDate = countElements(testDate);
-  	console.log(storeDate);
+  	// console.log(storeDate);
 //--------------------------------------------------------------------------------------------------	
 }
 
