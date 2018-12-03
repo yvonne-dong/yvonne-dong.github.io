@@ -55,8 +55,8 @@ function buttonPressed(){
 	//var url = 'https://api.harvardartmuseums.org/object?q=totalpageviews:1&size=10&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 	// console.log(inp.value());
 
-	var artistUrl = 'https://api.harvardartmuseums.org/image/195408?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
-	// var artistUrl = 'https://api.harvardartmuseums.org/object?person='+inp.value()+'&size=100&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
+	//var artistUrl = 'https://api.harvardartmuseums.org/image/195408?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
+	var artistUrl = 'https://api.harvardartmuseums.org/object?person='+inp.value()+'&size=100&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 	//var url = 'https://api.harvardartmuseums.org/classification?size=60&sortorder=asc&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
   	loadJSON(artistUrl, getTechnique);
 }
