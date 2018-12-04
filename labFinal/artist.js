@@ -64,7 +64,7 @@ function setup(){
 	// buttonElement = createButton('search artist');
 	// buttonElement.mousePressed(buttonPressed);
 	// buttonStyle();
-	homeButtonElement = createButton('homepage');
+	homeButtonElement = createButton('<');
 	homeButtonElement.mousePressed(returnToHome);	
 	homeButtonStyle();
 

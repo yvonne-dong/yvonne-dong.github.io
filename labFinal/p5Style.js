@@ -62,8 +62,9 @@ function homeButtonStyle(){
     //580px
     homeButtonElement.style('top', '20px');
     homeButtonElement.style('background-color', '#383838');
-    homeButtonElement.style('width', '110px');
-    homeButtonElement.style('padding', '10px');
+    homeButtonElement.style('width', '30px');
+    homeButtonElement.style('height', '30px');
+    // homeButtonElement.style('padding', '5px');
     homeButtonElement.style('text-align', 'center');
     homeButtonElement.style('font-size', '15px');
     homeButtonElement.style('color', bgColor);
