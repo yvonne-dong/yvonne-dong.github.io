@@ -62,7 +62,8 @@ function buttonPressed(){
 }
 
 function getTechnique(data){
-	console.log(data);
+	console.log(data.records[0].primaryimageurl);
+	console.log(data.records[0].images);
 	//console.log(data.records[0].people[0].displayname);
 	// var rankMost = 0;
 	// for (var i = 0; i < data.info.totalrecordsperquery; i ++) {

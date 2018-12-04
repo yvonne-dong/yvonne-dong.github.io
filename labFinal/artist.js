@@ -28,7 +28,7 @@ var storeDate = []; //count the sum of repeated dates
 
 //store data of most active work
 var mostActiveData, mostActivetitle, mostActiveUrl;
-var imgId, imgUrl, img;
+var imgId, imgUrl, img, searchImgUrl;
 
 var bgColor;
 
@@ -48,7 +48,7 @@ function dataReset(){
 
 function placeCanvas() {
   var x = 530;
-  var y = 180;
+  var y = 210;
   cnv.position(x, y);
 }
 
@@ -56,6 +56,7 @@ function setup(){
 	cnv = createCanvas(695, 300);
 	placeCanvas();
 	bgColor = color(232,232,232);
+	//bgColor = color(100,0,0);
 	title = createElement('h2', 'ARTIST EXPLORER');
 	// title = createElement('h2', 'Peter Paul Rubens');
 	titleStyle();
@@ -74,7 +75,7 @@ function setup(){
 	// mostActiveUrl = createP('http://p5js.org/');
 	mostActivetitleStyle();
 
-	document.body.style.backgroundColor = color(232);
+	document.body.style.backgroundColor = bgColor;
 	
 	inp = createInput('');
     inputStyle();
@@ -83,16 +84,16 @@ function setup(){
 function draw(){
 	//preset 232
 	background(bgColor);
+	// noStroke();
 	var dateRectW = width/2+130;
 	var rectH = height-3;
 	var techRectW = 196;
 
-	
 	for (var i = 0; i < storeTech.length; i ++) {
 		techniqueTypes(storeTech[i].value, storeTech[i].count, i*40);
 	}
 	for (var j = 0; j < storeDate.length; j ++) {
-		dateGraph(storeDate[j].value, storeDate[j].count, j*20+20);
+		dateGraph(storeDate[j].value, storeDate[j].count, j*20+40);
 	}
 
 	//setup two graphs
@@ -193,21 +194,33 @@ function enterPressed(){
 
 function getObjImage(data){
 	//create image for most viewed work
-	imgUrl = data.baseimageurl;
+	imgUrl = data.primaryimageurl;
+	//var pickColor = int(random(data.colors.length));
+	// console.log(data.colors.length);	
+	console.log(data.colors);		
+	console.log(data);				
+	//bgColor = color(0,100,0);
+	if (data.colors == null) {
+		bgColor = color(232);
+	} else {
+		bgColor = data.colors[int(random(data.colors.length))].css3;
+	}
+
 	if (imgUrl == null){
 		img.remove();
 		img = createImg('assets/notFound.png');
 		imgStyle();
 		bgColor = color(232);
 		console.log('no image found');
-		console.log('no color found');
+		// console.log('no color found');
 	} else {
 		img.remove();
-		img = createImg(imgId);
+		img = createImg(imgUrl);
+		// bgColor = data.colors[0].css3;
 		imgStyle();
 		document.body.style.backgroundColor = color(bgColor);
 		background(bgColor);
-		// console.log(bgColor);		
+		homeButtonElement.style('color', bgColor);
 	}
 }
 
@@ -241,23 +254,25 @@ function getPersonObj(data){
 		}
 
 		//get the most active work
-		if (this.rankMost < data.records[i].rank){
+		//data.records[i].rank
+		if (this.rankMost < data.records[i].totalpageviews){
 			//store the comparing rank number
-			this.rankMost = data.records[i].rank;
+			this.rankMost = data.records[i].totalpageviews;
 			//store the info - complete record + title + website link + image
 			mostActiveData = data.records[i];
 			// mostActivetitle = data.records[i].title;
 			mostActiveUrl = data.records[i].url;
 			imgId = data.records[i].id;
-			mostActivetitle.html('- '+data.records[i].title);
+			mostActivetitle.html('- '+data.records[i].title +'\n'+ mostActiveUrl);
 			//document.body.style.backgroundColor = data.records[i].colors[0].css3;
 			// bgColor = data.records[i].colors[0].css3;
 			// console.log(data.records[i].colors);
+			searchImgUrl = 'https://api.harvardartmuseums.org/object/'+imgId+'?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 		}
 	}	
 
- 	var searchImgUrl = 'https://api.harvardartmuseums.org/image/'+imgId+'?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
  	loadJSON(searchImgUrl, getObjImage);
+ 	//console.log('https://api.harvardartmuseums.org/object/'+imgId+'?apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296');
 
 //--------------------reference: https://gist.github.com/ralphcrisostomo/3141412--------------------
 	//count the sum of used techniques and dates
@@ -278,7 +293,7 @@ function techniqueTypes(techName, techNameCount, posAdd){
 	textSize(15);
 	// textAlign(LEFT);
 	fill(56);
-	text(this.techNameCount+' pieces of '+this.technique, width/2+158, height/2-20+this.posAdd, 180,50);
+	text(this.techNameCount+' pieces of '+this.technique, width/2+158, 50+this.posAdd, 180,50);
 }
 
 //draw graph for artwork dates
@@ -308,7 +323,7 @@ function dateGraph(date, dateCount, posX){
 	textStyle(NORMAL);
 	fill(56);
 	// text(dateCount +' works', this.posX, this.datePosY+10);
-	text(this.objDate, this.posX, this.countPosY);
+	text(this.objDate, this.posX-10, this.countPosY);
 	
 	//fill(100);
 	// line(10, height/2-50, width/2-10, height/2-50);
