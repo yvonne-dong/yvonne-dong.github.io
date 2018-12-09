@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> 
+	   body {
+          position: absolute;
+          flex-wrap: wrap;
+        	background: white; 
+        	justify-content: center;
+        	align-items: center;
+          padding: 10px; 
+          margin-left: 25%; 
+    	} 
+
+      h1 {
+          margin-top: 50px; 
+          font-family: "Muli", sans-serif;
+          color: #383838;
+          font-size: 30px;
+          margin-left: 10px; 
+      }
+
+      p {
+          margin-left: 10px; 
+          font-family: "Oswald", sans-serif;
+          color: #383838;
+          font-size: 18px;
+      }
+
+      a {
+          display: inline-flex;
+          font-family: "Muli", sans-serif;
+          color: #383838;
+          font-size: 18px;
+          text-decoration: none;
+      }
+
+      .button {
+          padding: 20px; 
+          margin-top: 10px; 
+          margin-left: 10px; 
+          text-align: center;
+          word-wrap: break-word;
+          line-height: 25px;
+          border: 5px solid #383838;
+          width: 80px;
+          height: 80px;
+          cursor: pointer;
+          transition-duration: 0.3s;
+      }
+
+      body.artist {
+        background: #ffe589;
+        transition-duration: 0.3s;
+      }
+
+      body.types {
+        background: #fcdbdb;
+        transition-duration: 0.3s;
+      }
+
+      body.least {
+        background: #bccad8;
+        transition-duration: 0.3s;
+      }
+
+      body.originalBg {
+        background: white; 
+        transition-duration: 0.3s;
+      }
+    	
+	</style>
+  <title>Museum Digital Experience</title>
+	<link href="https://fonts.googleapis.com/css?family=Muli:900|Oswald" rel="stylesheet"> 
+  </head>
+  <body>  
+    <h1>Harvard Arts Museum<br> - Digital Experience</h1>
+    <p>Browse our collection in a different way<p>
+    <a href="artistSearch.html" class="button" id="hoverArtist">Explore Specific Artist</a>
+    <a href="classification.html" class="button" id="hoverTypes">Visualize the Collection</a>
+    <a href="" class="button" id="hoverLeast">Least Viewed Artworks</a>
+  </body>
+  <script>
+      var artistBg = document.getElementById('hoverArtist');
+      var typesBg = document.getElementById('hoverTypes');
+      var leastBg = document.getElementById('hoverLeast');
+      var body = document.body;
+
+      artistBg.onmouseover = function() {
+        body.className = 'artist';
+        artistBg.style.background = '#383838';
+        artistBg.style.color = '#ffe589';
+      };
+      artistBg.onmouseout = function() {
+        body.className = 'originalBg';
+        artistBg.style.background = 'transparent';
+        artistBg.style.color = '#383838';
+      };
+
+      typesBg.onmouseover = function() {
+        body.className = 'types';        
+        typesBg.style.background = '#383838';
+        typesBg.style.color = '#fcdbdb';
+      };
+      typesBg.onmouseout = function() {
+        body.className = 'originalBg';
+        typesBg.style.background = 'transparent';
+        typesBg.style.color = '#383838';
+      };
+
+      leastBg.onmouseover = function() {
+        body.className = 'least';
+        leastBg.style.background = '#383838';
+        leastBg.style.color = '#bccad8';
+      };
+      leastBg.onmouseout = function() {
+        body.className = 'originalBg';
+        leastBg.style.background = 'transparent';
+        leastBg.style.color = '#383838';
+      };
+    </script>
+</html>

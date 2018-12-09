@@ -1,11 +1,11 @@
 
 function titleStyle(){
     title.style('position', 'absolute');
-    title.style('left', '520px');
-    title.style('top', '30px');
+    // title.style('left', '520px');
+    // title.style('top', '30px');
     title.style('font-family', 'Muli', 'sans-serif');
     title.style('font-size', '40px');
-    title.style('width', '300px');
+    // title.style('width', '300px');
     title.style('padding', '10px');
     title.style('color', '#383838');
     //title.style('border', '5px solid blue');
@@ -13,11 +13,11 @@ function titleStyle(){
 
 function mostActivetitleStyle(){
     mostActivetitle.style('position', 'absolute');
-    mostActivetitle.style('left', '520px');
-    mostActivetitle.style('top', '510px');
+    // mostActivetitle.style('left', '520px');
+    // mostActivetitle.style('top', '510px');
     mostActivetitle.style('font-family', 'Oswald', 'sans-serif');
     mostActivetitle.style('font-size', '20px');
-    mostActivetitle.style('width', '600px');
+    // mostActivetitle.style('width', '600px');
     mostActivetitle.style('padding', '10px');
     // mostActivetitle.style('border', '5px solid blue');
     mostActivetitle.style('color', '#383838');
@@ -58,9 +58,8 @@ function buttonStyle(){
 // homeButtonElement.style('left', '900px');
 function homeButtonStyle(){
     homeButtonElement.style('position', 'absolute');
-    homeButtonElement.style('left', '530px');
-    //580px
-    homeButtonElement.style('top', '20px');
+    // homeButtonElement.style('left', '530px');
+    // homeButtonElement.style('top', '20px');
     homeButtonElement.style('background-color', '#383838');
     homeButtonElement.style('width', '30px');
     homeButtonElement.style('height', '30px');

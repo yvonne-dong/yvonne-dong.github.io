@@ -60,6 +60,9 @@ function setup(){
 	title = createElement('h2', 'ARTIST EXPLORER');
 	// title = createElement('h2', 'Peter Paul Rubens');
 	titleStyle();
+	title.style('left', '520px');
+    title.style('top', '30px');
+    title.style('width', '300px');
 
 	// buttonElement = createButton('search artist');
 	// buttonElement.mousePressed(buttonPressed);
@@ -67,6 +70,8 @@ function setup(){
 	homeButtonElement = createButton('<');
 	homeButtonElement.mousePressed(returnToHome);	
 	homeButtonStyle();
+	homeButtonElement.style('left', '530px');
+    homeButtonElement.style('top', '20px');
 
 	img = createImg('assets/notFound.png');
 	imgStyle();
@@ -74,6 +79,9 @@ function setup(){
 	mostActivetitle = createP("- Title of this artwork: ");
 	// mostActiveUrl = createP('http://p5js.org/');
 	mostActivetitleStyle();
+	mostActivetitle.style('left', '520px');
+    mostActivetitle.style('top', '510px');
+    mostActivetitle.style('width', '600px');
 
 	document.body.style.backgroundColor = bgColor;
 	
@@ -119,7 +127,7 @@ function draw(){
 }
 
 function returnToHome(){
-
+    window.open('homepage.html','_self');
 }
 
 function keyPressed() {
