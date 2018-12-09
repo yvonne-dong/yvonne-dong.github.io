@@ -3,7 +3,7 @@ var method = 'https://api.harvardartmuseums.org/classification?size=100';
 //var techniqueNum = 7317;
 var apiKey = '&apikey=506b01a0-40d2-11e8-9ec4-7fae965d6296';
 
-var buttonElement;
+var titleText;
 
 //store classification number and name
 var classNumName = [];
@@ -16,17 +16,13 @@ var mouseDist, displayAllClass, displayThisClass;
 
 function placeCanvas() {
   var x = 90;
-  var y = 100;
+  var y = 120;
   cnv.position(x, y);
 }
 
 function setup(){
 	cnv = createCanvas(1100, 500);
 	placeCanvas();
-
-	
-	// buttonElement = createButton('classification');
-	// buttonElement.mousePressed(buttonPressed);
 	colorMode(HSB, 100);	
 
 	for (var col = 50; col < height; col += 90) {
@@ -40,10 +36,10 @@ function setup(){
 	displayAllClass = true;
 	displayIndividualClass = false;
 
-	buttonPressed();
+	requestAPI();
 	// console.log(positionArray);
-
-	title = createElement('h2', 'Visualize the HAM Collection');
+	titleText = 'Visualize the HAM Collection';
+	title = createElement('h2', 'VISUALIZE THE COLLECTION');
 	titleStyle();
 	title.style('left', '150px');
     title.style('top', '0px');
@@ -54,12 +50,14 @@ function setup(){
 	homeButtonStyle();
 	homeButtonElement.style('left', '115px');
     homeButtonElement.style('top', '54px');
+    homeButtonElement.mouseOver(highlight);
+  	homeButtonElement.mouseOut(unhighlight);
 
     mostActivetitle = createP("- Click on one classification to see the details");
 	// mostActiveUrl = createP('http://p5js.org/');
 	mostActivetitleStyle();
-	mostActivetitle.style('left', '820px');
-    mostActivetitle.style('top', '550px');
+	mostActivetitle.style('left', '150px');
+    mostActivetitle.style('top', '60px');
     mostActivetitle.style('width', '400px');
 }
 
@@ -116,7 +114,7 @@ function draw(){
 
 }
 
-function buttonPressed(){
+function requestAPI(){
 	var url = method + apiKey;	
   	loadJSON(url, getClassfication);
 }
@@ -162,15 +160,19 @@ function classCircle(num, name, x, y, angle){
 		// var radius = map(this.r, 1, 41785, 1, width);
 		// var radius = map(this.r, 1, 41785, 50, 200);
 		// noStroke();
+		
+		// strokeWeight(3);
+		
+		// stroke(this.circleColor,100,100);
+		// stroke('#383838');
 		fill(this.circleColor,100,100,50);
-		strokeWeight(3);
-		stroke(this.circleColor,100,100);
 		ellipse(this.pos.x, this.pos.y, this.r, this.r);
 		noStroke();
+		fill('#383838');
 		textSize(12);
 		textAlign(CENTER);
 		textFont('Helvetica');
-		fill(this.circleColor,100,100);
+		// fill(this.circleColor,100,100);
 		text(this.className, this.pos.x-24, this.pos.y+30, 50, 50);
 	};
 }

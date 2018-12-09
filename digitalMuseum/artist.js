@@ -10,7 +10,7 @@ user input artist name/select artist name?
 
 
 var buttonElement;
-var homeButtonElement;
+var homeButtonElement, titleText;
 var inp;
 
 //store random artist id
@@ -57,6 +57,7 @@ function setup(){
 	placeCanvas();
 	bgColor = color(232,232,232);
 	//bgColor = color(100,0,0);
+	titleText = 'ARTIST EXPLORER';
 	title = createElement('h2', 'ARTIST EXPLORER');
 	// title = createElement('h2', 'Peter Paul Rubens');
 	titleStyle();
@@ -72,6 +73,8 @@ function setup(){
 	homeButtonStyle();
 	homeButtonElement.style('left', '530px');
     homeButtonElement.style('top', '20px');
+    homeButtonElement.mouseOver(highlight);
+  	homeButtonElement.mouseOut(unhighlight);
 
 	img = createImg('assets/notFound.png');
 	imgStyle();
@@ -237,7 +240,8 @@ function getPersonObj(data){
 	// console.log(data.records[0]);
 
 	// artistId = data.records[0].id;
-	title.html(data.records[0].people[0].displayname);
+	titleText = data.records[0].people[0].displayname;
+	title.html(titleText);
 	console.log(data.records[0].people[0].displayname);
 
 	var countUpTo;

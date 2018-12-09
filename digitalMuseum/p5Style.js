@@ -72,6 +72,21 @@ function homeButtonStyle(){
     homeButtonElement.style('cursor', 'pointer');
 }
 
+function highlight() {
+  this.style('background-color', bgColor);
+  this.style('color', '#383838');
+  this.style('cursor', 'pointer');
+  title.html("BACK TO HOMEPAGE");
+  // this.style('transition-duration', '0.3s'); 
+}
+
+function unhighlight() {
+  this.style('background-color', '#383838');
+  this.style('color', bgColor);
+  title.html(titleText);
+  // this.style('transition-duration', '0.3s');
+}
+
 function imgStyle(){
     img.style('position', 'absolute');
     img.style('object-fit', 'cover');
