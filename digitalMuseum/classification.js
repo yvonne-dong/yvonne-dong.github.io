@@ -102,14 +102,11 @@ function draw(){
 		textSize(50);
 		textFont('Helvetica');		
 		text(classCircleArray[displayThisClass].className, width/4, height/2);
+		textAlign(LEFT);
 		fill('#383838');
 		textSize(20);
-		textAlign(LEFT);
 		text('The HAM Collection Features '+classCircleArray[displayThisClass].classNum+' pieces of '+classCircleArray[displayThisClass].className, width/2+20, height/2-40, width/4, 100);
-		textAlign(RIGHT);
-		textSize(15);
-		text('click anywhere to go back', width-15, height-15);
-		mostActivetitle.html(' ');
+		mostActivetitle.html('- Click anywhere to go back');
 	}	
 
 }
