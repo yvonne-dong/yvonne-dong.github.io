@@ -51,7 +51,7 @@
       }
 
       body.artist {
-        background: #ffe589;
+        background: #e8e8e8;
         transition-duration: 0.3s;
       }
 
@@ -61,7 +61,7 @@
       }
 
       body.least {
-        background: #bccad8;
+        background: #ffe589;
         transition-duration: 0.3s;
       }
 
@@ -79,7 +79,7 @@
     <p>Browse our collection in a different way<p>
     <a href="artistSearch.html" class="button" id="hoverArtist">Explore Specific Artist</a>
     <a href="classification.html" class="button" id="hoverTypes">Visualize the Collection</a>
-    <a href="" class="button" id="hoverLeast">Least Viewed Artworks</a>
+    <a href="least.html" class="button" id="hoverLeast">Least Viewed Artworks</a>
   </body>
   <script>
       var artistBg = document.getElementById('hoverArtist');
@@ -90,7 +90,7 @@
       artistBg.onmouseover = function() {
         body.className = 'artist';
         artistBg.style.background = '#383838';
-        artistBg.style.color = '#ffe589';
+        artistBg.style.color = '#e8e8e8';
       };
       artistBg.onmouseout = function() {
         body.className = 'originalBg';
@@ -112,7 +112,7 @@
       leastBg.onmouseover = function() {
         body.className = 'least';
         leastBg.style.background = '#383838';
-        leastBg.style.color = '#bccad8';
+        leastBg.style.color = '#ffe589';
       };
       leastBg.onmouseout = function() {
         body.className = 'originalBg';

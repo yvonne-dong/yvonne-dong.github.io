@@ -54,7 +54,6 @@ function setup(){
   	homeButtonElement.mouseOut(unhighlight);
 
     mostActivetitle = createP("- Click on one classification to see the details");
-	// mostActiveUrl = createP('http://p5js.org/');
 	mostActivetitleStyle();
 	mostActivetitle.style('left', '150px');
     mostActivetitle.style('top', '60px');

@@ -78,6 +78,8 @@ function setup(){
 
 	img = createImg('assets/notFound.png');
 	imgStyle();
+	img.style('width', '500px');
+  	img.style('height', '640px');
 
 	mostActivetitle = createP("- Title of this artwork: ");
 	// mostActiveUrl = createP('http://p5js.org/');
@@ -221,6 +223,8 @@ function getObjImage(data){
 		img.remove();
 		img = createImg('assets/notFound.png');
 		imgStyle();
+		img.style('width', '500px');
+  		img.style('height', '640px');
 		bgColor = color(232);
 		console.log('no image found');
 		// console.log('no color found');
@@ -229,6 +233,8 @@ function getObjImage(data){
 		img = createImg(imgUrl);
 		// bgColor = data.colors[0].css3;
 		imgStyle();
+		img.style('width', '500px');
+  		img.style('height', '640px');
 		document.body.style.backgroundColor = color(bgColor);
 		background(bgColor);
 		homeButtonElement.style('color', bgColor);

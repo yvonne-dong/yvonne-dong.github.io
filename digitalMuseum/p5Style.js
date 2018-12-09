@@ -42,10 +42,10 @@ function inputStyle(){
 // buttonElement.style('left', '730px');
 function buttonStyle(){
     buttonElement.style('position', 'absolute');
-    buttonElement.style('left', '1027px');
-    buttonElement.style('top', '60px');
+    // buttonElement.style('left', '1027px');
+    // buttonElement.style('top', '60px');
     buttonElement.style('background-color', 'transparent');
-    buttonElement.style('width', '150px');
+    buttonElement.style('width', '100px');
     buttonElement.style('padding', '10px');
     buttonElement.style('text-align', 'center');
     buttonElement.style('font-size', '15px');
@@ -92,9 +92,6 @@ function imgStyle(){
     img.style('object-fit', 'cover');
     img.style('left', '0px');
     img.style('top', '0px');
-    // img.style('margin-top', '400px');
-	img.style('width', '500px');
-  	img.style('height', '640px');
- //  	img.style('padding', '10px');
- //  	img.style('border', '5px solid #383838');
+	// img.style('width', '500px');
+ //  	img.style('height', '640px');
 }
