@@ -57,9 +57,8 @@ function setup(){
 	placeCanvas();
 	bgColor = color(232,232,232);
 	//bgColor = color(100,0,0);
-	titleText = 'ARTIST EXPLORER';
-	title = createElement('h2', 'ARTIST EXPLORER');
-	// title = createElement('h2', 'Peter Paul Rubens');
+	titleText = 'Joseph Cornell';
+	title = createElement('h2', 'Joseph Cornell');
 	titleStyle();
 	title.style('left', '520px');
     title.style('top', '30px');
@@ -76,12 +75,20 @@ function setup(){
     homeButtonElement.mouseOver(highlight);
   	homeButtonElement.mouseOut(unhighlight);
 
-	img = createImg('assets/notFound.png');
+	img = createImg('assets/artist.png');
 	imgStyle();
 	img.style('width', '500px');
   	img.style('height', '640px');
 
-	mostActivetitle = createP("- Title of this artwork: ");
+  	mostActiveUrl = 'https://www.harvardartmuseums.org/collections/object/232240?position=0';
+	mostActivetitle = createP("- Midnight Carrousel"+'\n'+"https://www.harvardartmuseums.org/collections/object/232240?position=0");
+	mostActivetitle.style('background-color', '#383838');
+  	mostActivetitle.style('color', bgColor);
+  	mostActivetitle.style('margin-left', '10px');
+	mostActivetitle.mousePressed(gotoLink);
+	mostActivetitle.mouseOver(urlHighlight);
+  	
+
 	// mostActiveUrl = createP('http://p5js.org/');
 	mostActivetitleStyle();
 	mostActivetitle.style('left', '520px');
@@ -106,7 +113,7 @@ function draw(){
 		techniqueTypes(storeTech[i].value, storeTech[i].count, i*40);
 	}
 	for (var j = 0; j < storeDate.length; j ++) {
-		dateGraph(storeDate[j].value, storeDate[j].count, j*20+40);
+		dateGraph(storeDate[j].value, storeDate[j].count, j*40+100);
 	}
 
 	//setup two graphs
@@ -133,6 +140,10 @@ function draw(){
 
 function returnToHome(){
     window.open('homepage.html','_self');
+}
+
+function gotoLink(){
+	window.open(mostActiveUrl,'_blank');
 }
 
 function keyPressed() {
@@ -238,6 +249,7 @@ function getObjImage(data){
 		document.body.style.backgroundColor = color(bgColor);
 		background(bgColor);
 		homeButtonElement.style('color', bgColor);
+		mostActivetitle.style('color', bgColor);
 	}
 }
 
@@ -318,7 +330,7 @@ function techniqueTypes(techName, techNameCount, posAdd){
 function dateGraph(date, dateCount, posX){
 	var timelineDate;
 	this.objDate = date;
-	this.dateCount = dateCount*10;
+	this.dateCount = dateCount*40;
 	if (posX > width/2+100) {
 		this.posX = posX-(width/2+100);
 		this.posY = height/2+50;
@@ -340,9 +352,10 @@ function dateGraph(date, dateCount, posX){
 	textSize(10);
 	textStyle(NORMAL);
 	fill(56);
-	// text(dateCount +' works', this.posX, this.datePosY+10);
+	text(dateCount +' works', this.posX-10, this.countPosY+20);
 	text(this.objDate, this.posX-10, this.countPosY);
 	
+
 	//fill(100);
 	// line(10, height/2-50, width/2-10, height/2-50);
 	// rect(timelineDate, height/2-50, 30, this.dateCount*2);

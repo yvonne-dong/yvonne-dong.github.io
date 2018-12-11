@@ -20,7 +20,7 @@ function mostActivetitleStyle(){
     // mostActivetitle.style('width', '600px');
     mostActivetitle.style('padding', '10px');
     // mostActivetitle.style('border', '5px solid blue');
-    mostActivetitle.style('color', '#383838');
+    mostActivetitle.style('color', bgColor);
 }
 
 // inp.style('top', '580px');
@@ -86,6 +86,11 @@ function unhighlight() {
   title.html(titleText);
   // this.style('transition-duration', '0.3s');
 }
+
+function urlHighlight(){
+  this.style('cursor', 'pointer');
+}
+
 
 function imgStyle(){
     img.style('position', 'absolute');
