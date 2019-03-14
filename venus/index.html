@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title>bootleg Jeff Koons</title>
+	<style>
+		body{
+			margin: 0;
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body>
+	<video id="video" autoplay style="display:none"></video>
+	<!-- <canvas id="myCanvas"></canvas> -->
+	<script src="three.js"></script>
+	<!-- <script src="OrbitControls.js"></script> -->
+	<script>
+			var scene = new THREE.Scene();
+			var video = document.getElementById( 'video' );
+
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			var light = new THREE.AmbientLight(0xffffff, 0.6);
+			var plight = new THREE.PointLight(0xffffff, 0.7);
+			plight.position.set(-1, 2, 1);
+			scene.add(light);
+			scene.add(plight);
+
+			var texture = new THREE.VideoTexture( video );
+		    texture.minFilter = THREE.LinearFilter;
+		    texture.magFilter = THREE.LinearFilter;
+		    texture.format = THREE.RGBFormat;
+
+		    //Check cam
+		    if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
+					var constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+					navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
+						// apply the stream to the video element used in the texture
+						video.srcObject = stream;
+						video.play();
+					} ).catch( function ( error ) {
+						console.error( 'Unable to access the camera/webcam.', error );
+					} );
+				} else {
+					console.error( 'MediaDevices interface not available.' );
+				}
+
+			var loader = new THREE.JSONLoader();
+			loader.load('venus.json', handle_load);
+
+			var mesh;
+	    	var mixer;
+
+			function handle_load(geometry, materials){
+				var material = new THREE.MeshLambertMaterial({morphTargets: true});
+	        	mesh = new THREE.Mesh(geometry, material);
+	        	scene.add(mesh);
+	        	mesh.scale.set(0.25,0.25,0.25);
+	        	mesh.position.y = -2.5;
+			}
+			
+			var geometry = new THREE.SphereGeometry( 0.5, 15, 15 );
+			// var material = new THREE.MeshPhongMaterial({color: 0xff0000, specular: 0x848282, shininess: 15});
+			var material = new THREE.MeshPhongMaterial( { map:texture, color: 0x4286f4, specular: 0xffffff, shininess: 25} );
+			var sphere = new THREE.Mesh( geometry, material );
+			scene.add( sphere );
+			sphere.position.y = 0.5;
+			sphere.position.z = 0.8;
+			camera.position.z = 4;
+
+			var animate = function () {
+				requestAnimationFrame( animate );
+				sphere.rotation.x += 0.01;
+				renderer.render( scene, camera );
+			};
+
+			animate();
+	</script>
+</body>
