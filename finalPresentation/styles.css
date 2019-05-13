@@ -1,0 +1,125 @@
+ 
+    body {
+        /*padding: 0; */
+        background: #FFBF20; 
+        /*position:absolute;*/
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        /*font-family: 'Press Start 2P', cursive;*/
+        color: #302626;
+    }
+    
+    h1 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 40px; 
+        line-height: 50px;
+    }
+
+    h2 {
+        font-family: 'Roboto', sans-serif; 
+        font-size: 24px;
+        line-height: 40px;
+    }
+        
+    p {
+        font-family: 'Roboto', sans-serif; 
+        font-size: 18px; 
+    }
+
+    .button{
+        font-size: 14px;
+        transition-duration: 0.4s;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        border: 5px solid #302626;
+        width: 180px;
+        height: 180px;
+        color: #302626;
+        line-height: 180px;
+        
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .button:hover{
+        background-color: #302626;
+        color: #FFBF20;
+    }
+
+    #b1 {
+        position:absolute; 
+        /*top:60px; */
+        top:10%; 
+        left:7%; 
+        /*background: url('assets/1.png');
+        background-repeat: no-repeat;*/
+    }
+
+    #b2 {
+        position:absolute; 
+        top:10%; 
+        left:22.5%; 
+        /*https://www.moma.org/calendar/exhibitions/5033?installation_image_index=8*/
+        /*background: url('https://pbs.twimg.com/media/D0rSnt9X0AYEmSU.jpg')*/
+    }
+
+    #b3 {
+        position:absolute; 
+        top:10%; 
+        left:38%; 
+    }
+
+    #b4 {
+        position:absolute; 
+        top:43%; 
+        left:7%; 
+    }
+
+    #b5 {
+        position:absolute; 
+        top:43%; 
+        left:22.5%; 
+    }
+
+    #b6 {
+        position:absolute; 
+        top:43%; 
+        left:38%; 
+    }
+
+
+    #title {
+        position:absolute; 
+        top:5%; 
+        left:57%; 
+    }
+
+    #name {
+        position:absolute; 
+        top:49%; 
+        left:57%; 
+        font-size: 20px; 
+    }
+
+    #terms {
+        position:absolute; 
+        top:100%; 
+        left:7%; 
+    }
+
+    #conclusion {
+        position:absolute; 
+        top:200%; 
+        left:7%; 
+    }	
+
+
+    .myBox {
+        position:absolute; 
+        border: 5px solid #302626;
+        padding: 5px;
+        overflow: scroll;  
+        background: #a5cdff; 
+    }
