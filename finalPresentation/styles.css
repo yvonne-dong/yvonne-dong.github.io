@@ -92,7 +92,7 @@
 
     #title {
         position:absolute; 
-        top:5%; 
+        top:7%; 
         left:57%; 
     }
 
@@ -119,7 +119,8 @@
     .myBox {
         position:absolute; 
         border: 5px solid #302626;
-        padding: 5px;
+        padding: 15px;
         overflow: scroll;  
         background: #a5cdff; 
+        /*text-align: center;*/
     }
