@@ -7,17 +7,17 @@ function attachPhoto() {
         $("#originPhoto").click();
     });
 
-    $("#originPhoto").change(function () {
-        if (this.files && this.files[0]) {
+    $("#originPhoto").change(function() {
+        for (var i = 0; i < this.files.length; i++) {
             var reader = new FileReader();
-            reader.onload = photoIsLoaded;
-            reader.readAsDataURL(this.files[0]);
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[i]);
         }
     });
 
-    function photoIsLoaded(e) {
+    function imageIsLoaded(e) {
         // var x = 'foo';
-        var picture = '<img src="' + e.target.result + '" style="width: 200px" class="userPhoto">'
+        var picture = '<img src="' + e.target.result + '" style="width:200px;" class="userPhoto">'
         $(".collection").append(picture);
     }
 
