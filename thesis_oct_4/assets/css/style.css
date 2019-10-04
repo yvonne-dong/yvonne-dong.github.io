@@ -4,11 +4,13 @@
 }
 
 .section{
-    margin-top: 8vh;
+    margin: 2vh;
     /* a value to fill whole vh */
     /* padding: 10vw; */
+    padding-top: 5vh;
     position: relative;
     text-align: center;
+    border: 4px solid blue;
 }
 
 .title{
@@ -20,9 +22,9 @@
 h1{
     font-family: 'Roboto', sans-serif; 
     font-size: 30px;
-    width: 80vw;
+    /* width: 70vw;
     position: relative;
-    margin: 0 auto;
+    margin: 0 auto; */
     margin-top: calc(1rem + 1vh);
 }
 
@@ -51,8 +53,9 @@ h1{
 }
 
 .userPhoto{
-    width: 200px;
-    padding: 1vw
+    width: 70vw;
+    padding: 1vw;
+    /* border: 4px solid blue; */
 }
 
 .collection{
@@ -60,6 +63,7 @@ h1{
     margin: 0 auto;
     padding: 2vw;
     border: 4px solid blue;
+    background-color: blue;
     margin-top:1vh;
     width: 80vw;
     height: 40vh;
