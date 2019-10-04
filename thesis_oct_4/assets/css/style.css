@@ -1,0 +1,30 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.section{
+    margin-top: 1vh;
+    /* a value to fill whole vh */
+    height: 500px;
+    padding: 10vw;
+    /* margin-top: 5vw; */
+    position: relative;
+    text-align: center;
+}
+
+.title{
+    font-size: calc(1rem + 2vw);
+}
+
+/* @media screen and (max-width: 800px){
+    .mobileMenu{
+        display: block;
+    }
+    #xContainer{
+        display: block;
+    }
+    .desktopMenu{
+        display: none;
+    }
+} */
