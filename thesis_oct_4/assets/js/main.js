@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 function casePhoto(){
-    $(".section").append("<h1>Photographer - Please take a photo of your favorite artwork in the show</h1>");
+    $(".section").append("<h1>Role: Photographer<br>Please take a photo of your favorite artwork in the show</h1>");
     $(".section").append("<div class='collection'></div>");
     $(".section").append("<input id='originPhoto' type='file' accept='image/*' capture='camera' style='width: 0; height: 0; overflow: hidden;' />");
     $(".section").append("<div class='buttons'></div>");
