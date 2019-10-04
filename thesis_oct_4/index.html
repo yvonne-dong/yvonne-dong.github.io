@@ -23,11 +23,14 @@
         <div>
             <span class="title">INSTRUCTIONS FOR GALLERY VISIT</span>
         </div>
-        <input type="file" accept="image/*" capture="camera" />
-        <!-- <input type="file" accept="image/*;capture=camera"> -->
-        <textarea id="message" placeholder="Type here" rows="10" cols="45" maxlength="280"></textarea>
+        <div class="collection"></div>
+        <input id="originPhoto" type="file" accept="image/*" capture="camera" style="width: 0; height: 0; overflow:hidden;" />
+        <button id="takePhoto">take image</button>
+
+
+        <!-- <textarea id="message" placeholder="Type here" rows="10" cols="45" maxlength="280"></textarea>
         <div id="buttons">
             <button id="submit" class="text">SUBMIT</button>
-        </div>
+        </div> -->
     </div>
 </body>
