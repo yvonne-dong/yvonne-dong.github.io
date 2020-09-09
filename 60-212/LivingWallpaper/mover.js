@@ -5,7 +5,7 @@ reference
 
 var Mover = function (mass, x, y) {
     this.pos = createVector(x, y);
-    this.vel = createVector(1, 0);
+    this.vel = createVector(0.1, 0);
     this.acc = createVector(0, 0);
     this.mass = mass;
 
@@ -26,7 +26,7 @@ var Mover = function (mass, x, y) {
         translate(this.pos.x, this.pos.y);
         rotateX(frameCount * mass * 0.01);
         rotateY(frameCount * mass * 0.01);
-        sphere(this.mass * 5, details, details);
+        sphere(this.mass * 3 + sin(frameCount*0.01), details, details);
         pop();
     }
 }

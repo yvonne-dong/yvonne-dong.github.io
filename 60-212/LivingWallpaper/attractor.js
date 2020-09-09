@@ -11,7 +11,7 @@ var Attractor = function () {
     this.attraction = function (move) {
         var force = p5.Vector.sub(this.pos, move.pos);
         var dist = force.mag();
-        dist = constrain(dist, 5, 25); //change
+        dist = constrain(dist, 2, 8); //change
         force.normalize();
         var strength = (this.gravity * this.mass * move.mass) / (dist * dist);
         force.mult(strength);
@@ -23,11 +23,19 @@ var Attractor = function () {
         translate(this.pos.x, this.pos.y);
         rotateX(frameCount * 0.01);
         rotateY(frameCount * 0.01);
-        sphere(this.mass * 2);
+        sphere(10 + this.mass * 2 * DoubleQuadraticSigmoid(sin(frameCount * 0.01)));
         pop();
     }
+}
 
-    this.update = function(){
-
-    }
+function DoubleQuadraticSigmoid(x) {
+  //function: "Double-Quadratic Sigmoid"
+  y = 0;
+  if (x <= 0.5) {
+    y = sq(2.0 * x) / 2.0;
+  }
+  else {
+    y = 1.0 - sq(2.0 * (x - 1.0)) / 2.0;
+  }
+  return y;
 }
