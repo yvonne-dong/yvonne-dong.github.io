@@ -8,6 +8,14 @@ let sidePoses = [[0, 0, 0, 0]];
 let shapes = [];
 
 let title = ["SHAPE GRAMMAR 1: A + B", "SHAPE GRAMMAR 2: A □ B", "SHAPE GRAMMAR 3: A ⊙ B"];
+let sceneState = {
+    s1: 0,
+    s2: 1,
+    s3: 2
+};
+let keyOn = false;
+let currentState = sceneState.s1;
+
 function setup() {
     canvas = createCanvas(600, 600);
     rectMode(CENTER);
@@ -40,12 +48,90 @@ function setup() {
 function draw() {
     background(0);
     fill(255);
-    text(title[0], width / 2, 25);
-    // text(title[1], width / 2, 25);
-    // text(title[2], width / 2, 25);
-    drawPoses();
-    for (var j = 0; j < shapes.length; j++) {
-        shapes[j].display();
+    drawScene(currentState);
+    checkTransition(currentState);
+    keyOn = false;
+}
+
+function drawScene(scene) {
+    switch (currentState) {
+        case sceneState.s1:
+            text(title[0], width / 2, 25);
+            drawPoses();
+            for (var j = 0; j < shapes.length; j++) {
+                shapes[j].displayS1();
+            }
+            break;
+
+        case sceneState.s2:
+            text(title[1], width / 2, 25);
+            drawPoses();
+            for (var j = 0; j < shapes.length; j++) {
+                shapes[j].displayS2();
+            }
+            break;
+
+        case sceneState.s3:
+            text(title[2], width / 2, 25);
+            drawPoses();
+            for (var j = 0; j < shapes.length; j++) {
+                shapes[j].displayS3();
+            }
+            break;
+
+        default:
+            break;
+
+    }
+}
+
+function checkTransition(scene) {
+    switch (scene) {
+        case sceneState.s1:
+            if (keyOn) {
+                currentState++;
+                setUpScene(currentState);
+            }
+            break;
+
+        case sceneState.s2:
+            if (keyOn) {
+                currentState++;
+                setUpScene(currentState);
+            }
+            break;
+
+        case sceneState.s3:
+            if (keyOn) {
+                currentState++;
+                setUpScene(currentState);
+            }
+            if (currentState > 2) {
+                currentState = 0;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+function setUpScene(scene) {
+    switch (scene) {
+        case sceneState.s1:
+            break;
+        case sceneState.s2:
+            break;
+        case sceneState.s3:
+            break;
+        default:
+            break;
+    }
+}
+
+function keyPressed() {
+    if (keyCode === ENTER) {
+        keyOn = true;
     }
 }
 
@@ -64,7 +150,7 @@ function Shape(_pos, _size, _mode) {
     this.mode = _mode;
 
     // A + B
-    this.display = function () {
+    this.displayS1 = function () {
         push();
         if (this.mode == 0) {
             stroke(255, 255, 0);
@@ -100,12 +186,57 @@ function Shape(_pos, _size, _mode) {
     }
 
     // A □ B
+    this.displayS2 = function () {
+        push();
+        if (this.mode == 0) {
+            stroke(255, 255, 0);
+            noFill();
+            rect(_pos.x, _pos.y, this.size, this.size);
+        } else if (this.mode == 1) {
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size * 1.1, this.size * 1.1);
+        } else if (this.mode == 2.1) {
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size * 1, this.size * 1.9);
+        } else if (this.mode == 2.2) {
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size * 1.9, this.size * 1);
+        }
+        pop();
+    }
+
 
     // A ⊙ B
-}
-
-function keyPressed(){
-
+    this.displayS3 = function () {
+        push();
+        if (this.mode == 0) {
+            stroke(255, 255, 0);
+            noFill();
+            rect(_pos.x, _pos.y, this.size, this.size);
+        } else if (this.mode == 1) {
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size * 0.9, this.size * 0.9);
+        } else if (this.mode == 2.1) {
+            stroke(255, 255, 0);
+            noFill();
+            rect(_pos.x, _pos.y, this.size * 1.1, this.size * 2);
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size, this.size * 2.1);
+        } else if (this.mode == 2.2) {
+            stroke(255, 255, 0);
+            noFill();
+            rect(_pos.x, _pos.y, this.size * 2, this.size * 1.1);
+            stroke(0);
+            fill(0);
+            rect(_pos.x, _pos.y, this.size * 2.1, this.size);
+        }
+        pop();
+    }
 }
 
 function mousePressed() {
