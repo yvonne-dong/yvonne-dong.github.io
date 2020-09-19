@@ -148,6 +148,7 @@ function draw() {
 }
 
 //---------------only for testing---------------
+/*
 function drawScene(scene) {
     switch (currentState) {
         case sceneState.s1:
@@ -267,6 +268,7 @@ function mousePressed() {
             random(center.y - 100, center.y + 100)));
     }
 }
+*/
 //---------------only for testing---------------
 
 
