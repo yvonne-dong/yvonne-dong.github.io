@@ -6,12 +6,6 @@
 class Mayfly {
     constructor(_pos, _scene) {
         this.position = _pos;
-        // this.velocity = p5.Vector.random2D();
-        // this.velocity.setMag(random(0.02, 1));
-        // this.acceleration = createVector();
-        // this.maxForce = 0.2;
-        // this.maxSpeed = 2;
-
         this.velocity = p5.Vector.random2D();
         this.velocity.setMag(random(3, 5));
         this.acceleration = createVector();

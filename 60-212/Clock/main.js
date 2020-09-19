@@ -4,7 +4,6 @@
 */
 
 // draw environment: frame, plants, pond
-
 let pond;
 let title = 'Ephemeroptera 朝生暮死';
 let sceneTitle = ['Stage 1: Emergence', 'Stage 2: Swarming', 'Stage 3: Mating', 'Stage 4: Death'];
@@ -24,22 +23,23 @@ let s, m, h;
 //position
 let center;
 
+//---------------only for testing---------------
 let sceneState = {
     s1: 0,
     s2: 1,
     s3: 2,
     s4: 3
 };
-
 let keyOn = false;
 let currentState = sceneState.s1;
+//---------------only for testing---------------
+
 
 function preload() {
     myFont = loadFont("AdobeMingStd-Light.otf");
 }
 
 function setup() {
-
     canvas = createCanvas(800, 600);
     center = createVector(width / 2, height / 2);
 
@@ -76,6 +76,7 @@ function draw() {
         center.x - width / 2 + fontSize,
         center.y + height / 2 - fontSize);
     pop();
+
 
     if (h >= 0 && h < 6) {
         eggsSum = [];
@@ -136,9 +137,17 @@ function draw() {
         drawDecay(eggsSum);
     }
 
+
+
+    //---------------only for testing---------------
+    // drawScene(currentState);
+    // checkTransition(currentState);
+    // keyOn = false;
+    //---------------only for testing---------------
+
 }
 
-
+//---------------only for testing---------------
 function drawScene(scene) {
     switch (currentState) {
         case sceneState.s1:
@@ -167,6 +176,7 @@ function drawScene(scene) {
 }
 
 function checkTransition(scene) {
+    console.log(mayflySum.length);
     switch (scene) {
         case sceneState.s1:
             if (keyOn) {
@@ -246,19 +256,17 @@ function keyPressed() {
 
 // *only for testing*
 function mousePressed() {
-    addEggSystem(eggsSum, createVector(random(center.x - 100, center.x + 100),
-        random(center.y - 100, center.y + 100)));
-
-    //// *move later*
-    // if (currentState == 0) {
-    //     setupEmerge(mayflySum,
-    //         createVector(random(center.x - 100, center.x + 100),
-    //             random(center.y - 100, center.y + 100)));
-    // }
-    // if (currentState == 3) {
-    //     addEggSystem(eggsSum, createVector(random(center.x - 100, center.x + 100),
-    //         random(center.y - 100, center.y + 100)));
-    // }
+    // *move later*
+    if (currentState == 0) {
+        setupEmerge(mayflySum,
+            createVector(random(center.x - 100, center.x + 100),
+                random(center.y - 100, center.y + 100)));
+    }
+    if (currentState == 3) {
+        addEggSystem(eggsSum, createVector(random(center.x - 100, center.x + 100),
+            random(center.y - 100, center.y + 100)));
+    }
 }
+//---------------only for testing---------------
 
 

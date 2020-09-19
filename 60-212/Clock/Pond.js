@@ -5,10 +5,6 @@ class Pond {
         this.numPoints = 50;
     }
 
-    update() {
-        // use perlin noise to animate pond
-    }
-
     display() {
         strokeWeight(1);
         stroke(255);
