@@ -1,6 +1,8 @@
 
 var storedEmotions = [];
-var visualToggle = false;
+// var visualToggle = false;
+var visualToggle = true;
+
 
 function setup() {
     loadCamera();
