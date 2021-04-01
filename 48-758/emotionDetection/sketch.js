@@ -112,7 +112,7 @@ function draw() {
             fill(255, 50);
             rect(0, 0, width, height);
             fill(255);
-            textSize(17);
+            textSize(15);
             text("DAILY FORTUNE:", 10, 50);
             text(output, 10, 60, width - 10, height - 10);
         }
